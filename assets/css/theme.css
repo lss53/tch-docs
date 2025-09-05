@@ -1,0 +1,1044 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans&Source+Sans+Pro&Roboto+Mono&display=swap");
+
+/* 定义默认变量（亮色主题） */
+:root {
+  /* 基础定义 */
+  --siteFont: "PT Sans", Helvetica Neue, Arial, sans-serif;
+  --codeFontFamily: "Roboto Mono", Monaco, courier, monospace;
+  --bodyFontSize: 16px;
+  --sidebarWidth: 300px; /* 使用变量控制侧边栏宽度，便于维护 */
+
+  /* 亮色主题变量 */
+  --accent: #42b983;
+  --accent-rgb: 66, 185, 131; /* 关键：将HEX颜色转换为RGB值，用于rgba() */
+
+  --toogleBackground: #091a28;
+  --background: #ffffff;
+  --textColor: #34495e;
+  --codeTextColor: #525252;
+  --codeBackgroundColor: #f8f8f8;
+  --borderColor: rgba(0, 0, 0, 0.07);
+  --blockQuoteColor: #858585;
+  --highlightColor: #d22778;
+  --sidebarSublink: #505d6b;
+  --codeTypeColor: #091a28;
+  --coverBackground: linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%);
+
+  /* 降级颜色 (默认值，供旧浏览器使用) */
+  --scrollbar-thumb: rgba(var(--accent-rgb), 0.3);
+  --scrollbar-thumb-hover: rgba(var(--accent-rgb), 0.5);
+  --sidebar-level1-border: rgba(var(--accent-rgb), 0.2);
+  --sidebar-level2-border: rgba(var(--accent-rgb), 0.4);
+  --sidebar-level3-border: rgba(var(--accent-rgb), 0.6);
+  --sidebar-active-child-border: rgba(var(--accent-rgb), 0.6);
+  --hover-bg: rgba(var(--accent-rgb), 0.08);
+  --active-bg: rgba(var(--accent-rgb), 0.08);
+  --toggle-bg: rgba(var(--accent-rgb), 0.1);
+  --toggle-hover-bg: rgba(var(--accent-rgb), 0.2);
+}
+
+/* 渐进增强：如果浏览器支持color-mix，则使用它来覆盖上面的降级颜色 */
+@supports (color: color-mix(in srgb, red, transparent)) {
+  :root {
+    --scrollbar-thumb: color-mix(in srgb, var(--accent) 30%, transparent);
+    --scrollbar-thumb-hover: color-mix(in srgb, var(--accent) 50%, transparent);
+    --sidebar-level1-border: color-mix(in srgb, var(--accent) 20%, transparent);
+    --sidebar-level2-border: color-mix(in srgb, var(--accent) 40%, transparent);
+    --sidebar-level3-border: color-mix(in srgb, var(--accent) 60%, transparent);
+    --sidebar-active-child-border: color-mix(in srgb, var(--accent) 60%, transparent);
+    --hover-bg: color-mix(in srgb, var(--accent) 8%, transparent);
+    --active-bg: color-mix(in srgb, var(--accent) 8%, transparent);
+    --toggle-bg: color-mix(in srgb, var(--accent) 10%, transparent);
+    --toggle-hover-bg: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+}
+
+/* 暗色主题变量覆盖 */
+[data-theme="dark"] {
+  --accent: #42b983;
+  --toogleBackground: #ffffff;
+  --background: #091a28;
+  --textColor: #b4b4b4;
+  --codeTextColor: #ffffff;
+  --codeBackgroundColor: #0e2233;
+  --borderColor: #0d2538;
+  --blockQuoteColor: #858585;
+  --highlightColor: #d22778;
+  --sidebarSublink: #b4b4b4;
+  --codeTypeColor: #ffffff;
+  --coverBackground: linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%);
+}
+
+/* 标准的全局CSS重置，提升跨浏览器一致性 */
+* {
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-text-size-adjust: none;
+    -webkit-touch-callout: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body:not(.ready) {
+    overflow: hidden;
+}
+
+body:not(.ready) .app-nav,
+body:not(.ready)>nav,
+body:not(.ready) [data-cloak] {
+    display: none;
+}
+
+div#app {
+    font-size: 30px;
+    font-weight: lighter;
+    margin: 40vh auto;
+    text-align: center;
+}
+
+div#app:empty:before {
+    content: "Loading...";
+}
+
+.search {
+    border-bottom: none!important;
+}
+
+.search .input-wrap {
+    margin-top: 20px!important;
+}
+
+.search input {
+    border: 1px solid var(--borderColor)!important;
+    background-color: var(--background)!important;
+    margin: 0 auto;
+    color: var(--textColor);
+    width: 90%!important;
+    border-radius: 15px;
+    text-indent: 15px;
+}
+
+.search .search-keyword,
+.search a:hover {
+    color: var(--accent);
+}
+
+.search .search-keyword {
+    font-style: normal;
+    font-weight: 700;
+}
+
+.progress {
+    background-color: var(--accent);
+    height: 2px;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: width .2s,opacity .4s;
+    width: 0;
+    z-index: 999999;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--textColor);
+    font-family: var(--siteFont);
+    font-size: var(--bodyFontSize);
+    letter-spacing: 0;
+    overflow-x: hidden;
+    background-color: var(--background);
+}
+
+.emoji {
+    height: 1.2rem;
+    vertical-align: middle;
+}
+
+a[disabled] {
+    cursor: not-allowed;
+    opacity: .6;
+}
+
+kbd {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 12px!important;
+    line-height: 12px;
+    margin-bottom: 3px;
+    padding: 3px 5px;
+    vertical-align: middle;
+}
+
+li input[type=checkbox] {
+    margin: 0 .2em .25em 0;
+    vertical-align: middle;
+}
+
+.app-nav {
+    margin: 25px 60px 0 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    z-index: 10;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.app-nav.no-badge {
+    margin-right: 25px;
+}
+
+.app-nav p {
+    margin: 0;
+}
+
+.app-nav>a {
+    margin: 0 1rem;
+    padding: 5px 0;
+}
+
+.app-nav li, .app-nav ul {
+    display: inline-block;
+    list-style: none;
+}
+
+.app-nav a {
+    color: inherit;
+    font-size: 16px;
+    text-decoration: none;
+    transition: color .3s;
+}
+
+.app-nav a.active,
+.app-nav a:hover {
+    color: var(--accent);
+}
+
+.app-nav a.active {
+    border-bottom: 2px solid var(--accent);
+}
+
+.app-nav li {
+    display: inline-block;
+    margin: 0 1rem;
+    padding: 5px 0;
+    position: relative;
+    cursor: pointer;
+}
+
+.app-nav li ul {
+    background-color: #fff;
+    border: 1px solid;
+    border-color: #ddd #ddd #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: none;
+    max-height: calc(100vh - 61px);
+    overflow-y: auto;
+    padding: 10px 0;
+    position: absolute;
+    right: -15px;
+    text-align: left;
+    top: 100%;
+    white-space: nowrap;
+}
+
+.app-nav li ul li {
+    display: block;
+    font-size: 14px;
+    line-height: 1rem;
+    margin: 8px 14px;
+    white-space: nowrap;
+}
+
+.app-nav li ul a {
+    display: block;
+    font-size: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+.app-nav li ul a.active {
+    border-bottom: 0;
+}
+
+.app-nav li:hover ul {
+    display: block;
+}
+
+.github-corner {
+    border-bottom: 0;
+    position: fixed;
+    right: 0;
+    text-decoration: none;
+    top: 0;
+    z-index: 1;
+    transition: fill 0.3s ease;
+}
+
+.github-corner:hover .octo-arm {
+    animation: octocat-wave .56s ease-in-out;
+}
+
+.github-corner svg {
+    color: #fff;
+    fill: var(--accent);
+    height: 70px;
+    width: 70px;
+}
+
+main {
+    display: block;
+    position: relative;
+    width: 100vw;
+    height: 100%;
+    z-index: 0;
+}
+
+main.hidden {
+    display: none;
+}
+
+.anchor {
+    display: inline-block;
+    text-decoration: none;
+    transition: all .3s;
+}
+
+.anchor span {
+    color: var(--textColor);
+}
+
+.anchor:hover {
+    text-decoration: underline;
+}
+
+.sidebar {
+    border-right: 1px solid var(--borderColor);
+    overflow-y: auto;
+    padding: 40px 0 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transition: transform .25s ease-out, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    width: var(--sidebarWidth);
+    z-index: 20;
+    color: var(--textColor);
+    background-color: var(--background);
+}
+
+.sidebar > h1 {
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.sidebar > h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.sidebar > h1 .app-nav {
+    display: block;
+    position: static;
+}
+
+.sidebar .sidebar-nav {
+    line-height: 2em;
+    padding-bottom: 40px;
+}
+
+.sidebar li.collapse .app-sub-sidebar {
+    display: none;
+}
+
+.sidebar li > p {
+    font-weight: 700;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+}
+.sidebar:hover::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-hover);
+}
+
+
+.sidebar-toggle {
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    transition: opacity .3s;
+    width: calc(var(--sidebarWidth) - 16px);
+    z-index: 30;
+    cursor: pointer;
+}
+
+.sidebar-toggle:hover .sidebar-toggle-button {
+    opacity: .4;
+}
+
+.sidebar-toggle span {
+    background-color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+    width: 16px;
+    height: 2px;
+    transition: background-color 0.3s ease;
+}
+
+body.sticky .sidebar, body.sticky .sidebar-toggle {
+    position: fixed;
+}
+
+.content {
+    padding-top: 60px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: var(--sidebarWidth);
+    transition: left .25s ease, background-color 0.3s ease, color 0.3s ease;
+    background-color: var(--background);
+    color: var(--textColor);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 15px; 
+}
+
+.sidebar li {
+    margin: 6px 0;
+}
+
+.sidebar ul li a {
+    color: var(--sidebarSublink);
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    display: block;
+    padding: 6px 15px; 
+    border-right: 3px solid transparent; 
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sidebar ul li a:hover {
+    color: var(--accent);
+    background-color: var(--hover-bg);
+}
+
+.sidebar ul li ul {
+    padding-left: 20px;
+    margin-left: 12px;
+    border-left: 1px solid var(--sidebar-level1-border);
+    transition: border-color 0.3s ease; 
+}
+
+.sidebar ul li ul li ul {
+    border-left-color: var(--sidebar-level2-border);
+}
+
+.sidebar ul li ul li ul li ul {
+    border-left-color: var(--sidebar-level3-border);
+}
+
+.sidebar ul li.active > a {
+    color: var(--accent);
+    font-weight: 600;
+    background-color: var(--active-bg);
+    border-right-color: var(--accent);
+}
+
+.sidebar ul li.active > ul {
+  border-left-color: var(--sidebar-active-child-border);
+}
+
+.sidebar li.collapsed > ul {
+    display: none;
+}
+
+.sidebar li.has-children > a::after {
+    content: '›';
+    position: absolute;
+    right: 25px; /* 调整位置以适应右侧边框 */
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    font-size: 20px;
+    line-height: 1;
+    font-weight: bold;
+    color: currentColor;
+    opacity: 0.5;
+    transition: transform 0.3s ease;
+}
+
+.sidebar li.has-children.expanded > a::after {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.markdown-section {
+    margin: 0 auto;
+    max-width: 90%;
+    padding: 30px 15px 40px;
+    position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.markdown-section>* {
+    box-sizing: border-box;
+    font-size: inherit;
+}
+
+.markdown-section>:first-child {
+    margin-top: 0!important;
+}
+
+.markdown-section hr {
+    border: none;
+    border-bottom: 1px solid #eee;
+    margin: 2em 0;
+}
+
+.markdown-section iframe {
+    border: 1px solid #eee;
+    width: 1px;
+    min-width: 100%;
+}
+
+.markdown-section table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: block;
+    margin-bottom: 1rem;
+    overflow: auto;
+    width: 100%;
+}
+
+.markdown-section th {
+    font-weight: 700;
+}
+
+.markdown-section td, .markdown-section th {
+    border: 1px solid #ddd;
+    padding: 6px 13px;
+}
+
+.markdown-section tr {
+    border-top: 1px solid #ccc;
+}
+
+.markdown-section p.tip, .markdown-section tr:nth-child(2n) {
+    background-color: var(--codeBackgroundColor);
+    transition: background-color 0.3s ease;
+}
+
+.markdown-section p.tip {
+    border-bottom-right-radius: 2px;
+    border-left: 4px solid #f66;
+    border-top-right-radius: 2px;
+    margin: 2em 0;
+    padding: 12px 24px 12px 30px;
+    position: relative;
+}
+
+.markdown-section p.tip:before {
+    background-color: #f66;
+    border-radius: 100%;
+    color: #fff;
+    content: "!";
+    font-family: Dosis, Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    left: -12px;
+    line-height: 20px;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    top: 14px;
+}
+
+.markdown-section p.tip code {
+    background-color: #efefef;
+}
+
+.markdown-section p.tip em {
+    color: #34495e;
+}
+
+.markdown-section p.warn {
+    background: rgba(66,185,131,.1);
+    border-radius: 2px;
+    padding: 1rem;
+}
+
+.markdown-section ul.task-list>li {
+    list-style-type: none;
+}
+
+body.close .sidebar {
+    transform: translateX(calc(var(--sidebarWidth) * -1));
+}
+
+body.close .sidebar-toggle {
+    width: auto;
+}
+
+body.close .content {
+    left: 0;
+}
+
+@media print {
+    .app-nav, .github-corner, .sidebar, .sidebar-toggle {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* 1. 沿用 Docsify 的默认侧边栏滑出逻辑 */
+    /* Docsify 会给 body 添加 .close 类来控制侧边栏 */
+    /* 侧边栏默认在屏幕外 */
+    .sidebar {
+        left: calc(var(--sidebarWidth) * -1);
+        transition: transform .25s ease-out;
+    }
+    /* 当 body.close 时，侧边栏滑入 */
+    body.close .sidebar {
+        transform: translateX(var(--sidebarWidth));
+    }
+    
+    /* 2. 确保 Docsify 的切换按钮在最上层 */
+    .sidebar-toggle {
+        z-index: 101;
+    }
+
+    
+    /* 5. 确保内容区不被错误移动 */
+    .content {
+        position: static;
+        left: 0;
+        max-width: 100vw;
+        transition: none; /* 内容区不需要移动动画 */
+    }
+
+    body.close .content {
+        /* 确保内容区在侧边栏滑出时保持不动 */
+        transform: none;
+    }
+
+    /* 6. 隐藏桌面端的元素 */
+    .app-nav, .github-corner {
+        display: none;
+    }
+}
+
+@keyframes octocat-wave {
+    0%, to {
+        transform: rotate(0);
+    }
+    20%, 60% {
+        transform: rotate(-25deg);
+    }
+    40%, 80% {
+        transform: rotate(10deg);
+    }
+}
+
+section.cover {
+    align-items: center;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+section.cover.show {
+    display: flex;
+    background: var(--coverBackground)!important;
+}
+
+section.cover.has-mask .mask {
+    background-color: #fff;
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
+section.cover .cover-main {
+    flex: 1;
+    margin: -20px 16px 0;
+    text-align: center;
+    z-index: 1;
+}
+
+section.cover a {
+    color: inherit;
+}
+
+section.cover a, section.cover a:hover {
+    text-decoration: none;
+}
+
+section.cover p {
+    line-height: 1.5rem;
+    margin: 1em 0;
+}
+
+section.cover h1 {
+    color: inherit;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin: .625rem 0 2.5rem;
+    position: relative;
+    text-align: center;
+}
+
+section.cover h1 a {
+    display: block;
+}
+
+section.cover h1 small {
+    bottom: -.4375rem;
+    font-size: 1rem;
+    position: absolute;
+}
+
+section.cover blockquote {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+section.cover ul {
+    line-height: 1.8;
+    list-style-type: none;
+    margin: 1em auto;
+    max-width: 500px;
+}
+
+section.cover .cover-main>p:last-child a {
+    border-radius: 2rem;
+    border: 1px solid var(--accent);
+    box-sizing: border-box;
+    color: var(--accent);
+    display: inline-block;
+    font-size: 1.05rem;
+    letter-spacing: .1rem;
+    margin: .5rem 1rem;
+    padding: .75em 2rem;
+    text-decoration: none;
+    transition: all .15s ease;
+}
+
+section.cover .cover-main>p:last-child a:last-child {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+section.cover .cover-main>p:last-child a:last-child:hover {
+    color: inherit;
+    opacity: .8;
+}
+
+section.cover .cover-main>p:last-child a:hover {
+    color: inherit;
+}
+
+section.cover blockquote>p>a {
+    border-bottom: 2px solid var(--accent);
+    transition: color .3s;
+}
+
+section.cover blockquote>p>a:hover {
+    color: var(--accent);
+}
+
+.markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section strong {
+    color: var(--textColor);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.markdown-section a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.markdown-section h1 {
+    font-size: 2rem;
+    margin: 0 0 1rem;
+}
+
+.markdown-section h2 {
+    font-size: 1.75rem;
+    margin: 45px 0 .8rem;
+}
+
+.markdown-section h3 {
+    font-size: 1.5rem;
+    margin: 40px 0 .6rem;
+}
+
+.markdown-section h4 {
+    font-size: 1.25rem;
+}
+
+.markdown-section h5 {
+    font-size: 1rem;
+}
+
+.markdown-section h6 {
+    color: #777;
+    font-size: 1rem;
+}
+
+.markdown-section figure, .markdown-section p {
+    margin: 1.2em 0;
+}
+
+.markdown-section ol, .markdown-section p, .markdown-section ul {
+    line-height: 1.6rem;
+    word-spacing: .05rem;
+}
+
+.markdown-section ol, .markdown-section ul {
+    padding-left: 1.5rem;
+}
+
+.markdown-section blockquote {
+    border-left: 4px solid var(--accent);
+    color: var(--blockQuoteColor);
+    margin: 2em 0;
+    padding-left: 20px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.markdown-section blockquote p {
+    font-weight: 600;
+    margin-left: 0;
+}
+
+.markdown-section iframe {
+    margin: 1em 0;
+}
+
+.markdown-section em {
+    color: #7f8c8d;
+}
+
+.markdown-section code {
+    border-radius: 2px;
+    color: var(--highlightColor);
+    font-size: .9rem;
+    margin: 0 2px;
+    padding: 3px 5px;
+    white-space: pre-wrap;
+    font-weight: 700;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.markdown-section code, .markdown-section pre {
+    background-color: var(--codeBackgroundColor);
+    font-family: var(--codeFontFamily);
+    transition: background-color 0.3s ease;
+}
+
+.markdown-section pre {
+    -moz-osx-font-smoothing: initial;
+    -webkit-font-smoothing: initial;
+    line-height: 1.5rem;
+    margin: 1.2em 0;
+    overflow: auto;
+    padding: 0 1.4rem;
+    position: relative;
+    word-wrap: normal;
+}
+
+.token.cdata, .token.comment, .token.doctype, .token.prolog {
+    color: #8e908c;
+}
+
+.token.namespace {
+    opacity: .7;
+}
+
+.token.boolean, .token.number {
+    color: #c76b29;
+}
+
+.token.punctuation {
+    color: #525252;
+}
+
+.token.property {
+    color: #c08b30;
+}
+
+.token.tag {
+    color: #2973b7;
+}
+
+.token.string {
+    color: var(--accent);
+    transition: color 0.3s ease;
+}
+
+.token.selector {
+    color: #6679cc;
+}
+
+.token.attr-name {
+    color: #2973b7;
+}
+
+.language-css .token.string, .style .token.string, .token.entity, .token.url {
+    color: #22a2c9;
+}
+
+.token.attr-value, .token.control, .token.directive, .token.unit {
+    color: var(--accent);
+    transition: color 0.3s ease;
+}
+
+.token.function, .token.keyword {
+    color: #e96900;
+}
+
+.token.atrule, .token.regex, .token.statement {
+    color: #22a2c9;
+}
+
+.token.placeholder, .token.variable {
+    color: #3d8fd1;
+}
+
+.token.deleted {
+    text-decoration: line-through;
+}
+
+.token.inserted {
+    border-bottom: 1px dotted #202746;
+    text-decoration: none;
+}
+
+.token.italic {
+    font-style: italic;
+}
+
+.token.bold, .token.important {
+    font-weight: 700;
+}
+
+.token.important {
+    color: #c94922;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+.markdown-section pre>code {
+    -moz-osx-font-smoothing: initial;
+    -webkit-font-smoothing: initial;
+    background-color: var(--codeBackgroundColor);
+    border-radius: 2px;
+    color: var(--codeTextColor);
+    display: block;
+    font-family: Roboto Mono, Monaco, courier, monospace;
+    font-size: .8rem;
+    line-height: inherit;
+    margin: 0 2px;
+    max-width: inherit;
+    overflow: inherit;
+    padding: 2.2em 5px;
+    white-space: inherit;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.markdown-section code:after, .markdown-section code:before {
+    letter-spacing: .05rem;
+}
+
+code .token {
+    -moz-osx-font-smoothing: initial;
+    -webkit-font-smoothing: initial;
+    min-height: 1.5rem;
+    position: relative;
+    left: auto;
+}
+
+pre:after {
+    color: var(--codeTypeColor);
+    content: attr(data-lang);
+    font-size: .6rem;
+    font-weight: 600;
+    height: 15px;
+    line-height: 15px;
+    padding: 5px 10px 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+    transition: color 0.3s ease;
+}
+
+#theme-toggle {
+    position: fixed; /* 固定在视窗的固定位置 */
+    top: 15px;
+    right: 15px;
+    z-index: 102; /* 确保它在最上层 */
+    
+    /* 移除背景和尺寸，使其成为一个透明的定位容器 */
+    background: transparent;
+    border: none;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    user-select: none;
+    padding: 5px; /* 增加一点内边距，扩大点击区域 */
+}
+
+#theme-toggle svg {
+    width: 25px;
+    height: 25px;
+    fill: var(--accent);
+    /* 将过渡效果应用在图标本身 */
+    transition: all 0.3s ease;
+    display: block; /* 确保SVG表现一致 */
+}
+
+#theme-toggle:hover svg {
+    opacity: 0.7;
+    transform: scale(1.15) rotate(5deg);
+}

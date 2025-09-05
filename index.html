@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <title>TchDocs</title>
+  <link rel="icon" href="_media/favicon.ico">
+  <link rel="preconnect" href="//cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <!-- 官方主题 -->
+  <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css"> -->
+  <!--折叠侧边栏主题 -->
+  <!-- <link rel="stylesheet" href="assets/css/sidebar.min.css"/> -->
+  <link rel="stylesheet" href="assets/css/theme.css"/>
+</head>
+<body>
+  <!-- 主题切换按钮 -->
+  <div id="theme-toggle">
+    <svg class="icon" viewBox="0 0 512 512">
+      <path d="M8 256c0 136.966 111.033 248 248 248s248-111.034 248-248S392.966 8 256 8 8 119.033 8 256zm248 184V72c101.705.0 184 82.311 184 184 0 101.705-82.311 184-184 184z"></path>
+    </svg>
+  </div>
+
+  <div id="app"></div>
+
+  <script>
+    window.$docsify = {
+      name: 'TchDocs',
+      // 加载 _sidebar.md
+      loadSidebar: true,
+      // loadNavbar: true,
+      alias: {
+        // --- 1. 侧边栏共享规则 ---
+        // 当访问 bio-qbank 目录下的任何页面时，都加载 /bio-qbank/_sidebar.md
+        '/bio-qbank/.*/_sidebar.md': '/bio-qbank/_sidebar.md',
+        // 当访问 bio-tpapers 目录下的任何页面时，都加载 /bio-tpapers/_sidebar.md
+        '/bio-tpapers/.*/_sidebar.md': '/bio-tpapers/_sidebar.md',
+        // 当访问 life 目录下的任何页面时，都加载 /life/_sidebar.md
+        '/life/.*/_sidebar.md': '/life/_sidebar.md',
+
+        // --- 2. URL 缩写规则 ---
+        // bio-qbank (题库)
+        '/one/(.*)': '/bio-qbank/one/$1',
+        '/two/(.*)': '/bio-qbank/two/$1',
+        '/xone/(.*)': '/bio-qbank/xone/$1',
+        '/xtwo/(.*)': '/bio-qbank/xtwo/$1',
+        '/xthree/(.*)': '/bio-qbank/xthree/$1',
+
+        // bio-tpapers (试卷)
+        '/gk/(.*)': '/bio-tpapers/gk/$1',
+        '/kd/(.*)': '/bio-tpapers/kd/$1'
+      },
+      // 侧边栏目录最大层级
+      subMaxLevel: 4,
+      //自动显示标题
+      autoHeader: true,
+      //自动跳转到页面顶部
+      auto2top: true,
+      //小屏设备下合并导航栏到侧边栏
+      mergeNavbar: true,
+      // 搜索插件配置
+      search: {
+        placeholder: '输入关键字搜索',
+        noData: '没有找到结果!',
+        depth: 3,
+      },
+      // 返回顶部插件配置
+      backToTop: {
+      /**
+       * @按钮的背景颜色。
+       * @example 'var(--accent)' // 使用 CSS 变量，与 Docsify 主题色保持一致
+       */
+        backgroundColor: 'var(--accent)',
+        textColor: '#ffffff', // 按钮内部 SVG 图标的颜色
+        cornerOffset: 25, // 按钮距离页面右下角的偏移量（单位：像素）
+        scrollDuration: 500, // 点击按钮后，页面滚动回顶部的动画持续时间（单位：毫秒）
+        /**
+         * @页面向下滚动超过该值（单位：像素）后，按钮才会显示。
+         * @推荐值为 100 到 500，避免在页面刚开始滚动时就出现，提升用户体验。
+         */
+        showWhenScrollTopIs: 300,
+        size: 40 // 圆形按钮的直径
+      },
+      // 在这里对 MathJax 插件进行自定义配置 (可选)
+      mathjax: {
+        /* // 稍微放大公式
+        svg: {
+          scale: 0.95
+        },
+        // 添加一个新的 TeX 宏
+        tex: {
+          macros: {
+          // 定义 \R 来表示实数集符号
+          R: '\\mathbb{R}',
+          // 定义一个带参数的宏，例如 \norm{x} 表示 ||x||
+          norm: ['\\left\\| #1 \\right\\|', 1] 
+          }
+        }*/
+      }
+    };
+  </script>
+
+  <!-- Docsify 核心库 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <!-- 搜索插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <!-- 主题插件 -->
+  <script src="assets/js/theme-toggle.js"></script>
+  <!-- MathJax 插件 -->
+  <script src="assets/js/mathjax-plugin.js"></script>
+  <!-- 返回顶部插件 -->
+  <script src="assets/js/back-to-top.js"></script>
+  <!-- 折叠侧边栏插件 -->
+  <!-- <script src="assets/js/docsify-sidebar-collapse.js"></script> -->
+  
+</body>
+</html>
