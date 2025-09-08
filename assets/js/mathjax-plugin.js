@@ -4,27 +4,19 @@
  * @param {object} hook Docsify hook object.
  * @param {object} vm Docsify vm object.
  */
-// js/mathjax-plugin.js
-
 (function() {
   'use strict';
 
-  /**
-   * Docsify MathJax Plugin - 优化版本
-   * @param {object} hook - Docsify hook object
-   * @param {object} vm - Docsify vm object
-   */
   function DocsifyMathJax(hook, vm) {
     const defaultConfig = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
         tags: 'ams',
-        // 让 .math-error 样式生效
         formatError: (jax, err) => {
           const errorNode = jax.formatError(err);
           errorNode.className = 'math-error';
-          errorNode.style.fontSize = '0.9em'; // 可选：让错误信息不那么突兀
+          errorNode.style.fontSize = '0.9em';
           return errorNode;
         }
       },
@@ -48,13 +40,11 @@
       }
     };
 
-    // 使用更简洁的方式合并配置
     const userConfig = vm.config.mathjax || {};
     const finalConfig = { ...defaultConfig, ...userConfig };
     finalConfig.tex = { ...defaultConfig.tex, ...(userConfig.tex || {}) };
     finalConfig.svg = { ...defaultConfig.svg, ...(userConfig.svg || {}) };
     finalConfig.options = { ...defaultConfig.options, ...(userConfig.options || {}) };
-
 
     function isMathJaxLoaded() {
       return typeof window.MathJax?.typesetPromise === 'function';
@@ -64,10 +54,6 @@
       return new Promise((resolve, reject) => {
         const scriptId = 'MathJax-script';
         if (document.getElementById(scriptId)) {
-          if (isMathJaxLoaded()) {
-            return resolve();
-          }
-          // 如果脚本标签存在但MathJax未就绪，则等待
           const checkInterval = setInterval(() => {
             if (isMathJaxLoaded()) {
               clearInterval(checkInterval);
@@ -81,7 +67,7 @@
         script.id = scriptId;
         script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
         script.async = true;
-        script.onload = resolve; // onload 触发时即可认定加载成功
+        script.onload = resolve;
         script.onerror = () => reject(new Error('MathJax脚本加载失败'));
         document.head.appendChild(script);
       });
@@ -93,22 +79,11 @@
       const style = document.createElement('style');
       style.id = styleId;
       style.textContent = `
-        mjx-container[display="true"] {
-          display: block; overflow-x: auto; overflow-y: hidden;
-          margin: 1.5rem 0; padding: 0.5rem 0.2rem;
-        }
+        mjx-container[display="true"] { display: block; overflow-x: auto; overflow-y: hidden; margin: 1.5rem 0; padding: 0.5rem 0.2rem; }
         mjx-container { max-width: 100%; line-height: 1.5; }
         .markdown-section { overflow-wrap: break-word; }
-        .math-error {
-          color: #e74c3c; background: #fdf2f2;
-          padding: 0.5em 0.8em; margin: 0.5em 0;
-          border-radius: 4px; border-left: 3px solid #e74c3c;
-        }
-        @media print {
-          mjx-container[display="true"] {
-            overflow: visible; page-break-inside: avoid;
-          }
-        }
+        .math-error { color: #e74c3c; background: #fdf2f2; padding: 0.5em 0.8em; margin: 0.5em 0; border-radius: 4px; border-left: 3px solid #e74c3c; }
+        @media print { mjx-container[display="true"] { overflow: visible; page-break-inside: avoid; } }
       `;
       document.head.appendChild(style);
     }
@@ -118,7 +93,6 @@
       injectStyles();
     });
 
-    // 增强错误处理
     hook.mounted(function() {
       loadMathJaxScript()
         .then(() => {
@@ -128,8 +102,13 @@
         })
         .catch(error => {
           console.error('MathJax加载失败:', error.message);
-          // 可选的错误恢复机制
-          fallbackMathRender();
+          // 如果MathJax加载失败，将公式用特殊样式包裹，避免暴露源码
+          document.querySelectorAll('.markdown-section').forEach(section => {
+            section.innerHTML = section.innerHTML.replace(
+              /\$(.*?)\$/g, 
+              '<span class="math-fallback">$1</span>'
+            );
+          });
         });
     });
 
@@ -142,13 +121,7 @@
     });
   }
 
-  if (typeof window !== 'undefined' && window.$docsify) {
+  if (window.$docsify) {
     window.$docsify.plugins = [].concat(window.$docsify.plugins || [], DocsifyMathJax);
-  } else {
-    window.addEventListener('DOMContentLoaded', function() {
-      if (window.$docsify) {
-        window.$docsify.plugins = [].concat(window.$docsify.plugins || [], DocsifyMathJax);
-      }
-    });
   }
 })();

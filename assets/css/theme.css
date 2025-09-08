@@ -1,17 +1,23 @@
-@import url("https://fonts.googleapis.com/css?family=PT+Sans&Source+Sans+Pro&Roboto+Mono&display=swap");
+/* ==========================================================================
+   0. 字体导入 (Font Imports)
+   ========================================================================== */
+/* Google Fonts 导入 URL */
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&family=Roboto+Mono&family=Source+Sans+Pro&display=swap");
 
+/* ==========================================================================
+   1. 变量定义 (Variables)
+   ========================================================================== */
 /* 定义默认变量（亮色主题） */
 :root {
   /* 基础定义 */
   --siteFont: "PT Sans", Helvetica Neue, Arial, sans-serif;
   --codeFontFamily: "Roboto Mono", Monaco, courier, monospace;
   --bodyFontSize: 16px;
-  --sidebarWidth: 300px; /* 使用变量控制侧边栏宽度，便于维护 */
+  --sidebarWidth: 300px;
 
   /* 亮色主题变量 */
   --accent: #42b983;
-  --accent-rgb: 66, 185, 131; /* 关键：将HEX颜色转换为RGB值，用于rgba() */
-
+  --accent-rgb: 66, 185, 131;
   --toogleBackground: #091a28;
   --background: #ffffff;
   --textColor: #34495e;
@@ -22,9 +28,9 @@
   --highlightColor: #d22778;
   --sidebarSublink: #505d6b;
   --codeTypeColor: #091a28;
-  --coverBackground: linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%);
+  --coverBackground: linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%, hsl(181, 100%, 85%) 100%);
 
-  /* 降级颜色 (默认值，供旧浏览器使用) */
+  /* 降级颜色 (供旧浏览器使用) */
   --scrollbar-thumb: rgba(var(--accent-rgb), 0.3);
   --scrollbar-thumb-hover: rgba(var(--accent-rgb), 0.5);
   --sidebar-level1-border: rgba(var(--accent-rgb), 0.2);
@@ -37,7 +43,7 @@
   --toggle-hover-bg: rgba(var(--accent-rgb), 0.2);
 }
 
-/* 渐进增强：如果浏览器支持color-mix，则使用它来覆盖上面的降级颜色 */
+/* 渐进增强：如果浏览器支持 color-mix，则使用它来覆盖上面的降级颜色 */
 @supports (color: color-mix(in srgb, red, transparent)) {
   :root {
     --scrollbar-thumb: color-mix(in srgb, var(--accent) 30%, transparent);
@@ -53,32 +59,34 @@
   }
 }
 
-/* 暗色主题变量覆盖 */
+/* 暗色主题变量覆盖 (移除了冗余变量，并为封面提供了独立背景) */
 [data-theme="dark"] {
-  --accent: #42b983;
   --toogleBackground: #ffffff;
   --background: #091a28;
   --textColor: #b4b4b4;
   --codeTextColor: #ffffff;
   --codeBackgroundColor: #0e2233;
   --borderColor: #0d2538;
-  --blockQuoteColor: #858585;
-  --highlightColor: #d22778;
   --sidebarSublink: #b4b4b4;
   --codeTypeColor: #ffffff;
-  --coverBackground: linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%);
+  --coverBackground: linear-gradient(to left bottom, hsl(215, 30%, 25%) 0%, hsl(220, 30%, 10%) 100%);
 }
 
-/* 标准的全局CSS重置，提升跨浏览器一致性 */
+/* ==========================================================================
+   2. 全局重置与基础样式 (Global Reset & Base Styles)
+   ========================================================================== */
+/* 使用更温和的 CSS 重置，避免影响第三方组件 */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+}
 * {
-    -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-text-size-adjust: none;
-    -webkit-touch-callout: none;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 body:not(.ready) {
@@ -102,34 +110,6 @@ div#app:empty:before {
     content: "Loading...";
 }
 
-.search {
-    border-bottom: none!important;
-}
-
-.search .input-wrap {
-    margin-top: 20px!important;
-}
-
-.search input {
-    border: 1px solid var(--borderColor)!important;
-    background-color: var(--background)!important;
-    margin: 0 auto;
-    color: var(--textColor);
-    width: 90%!important;
-    border-radius: 15px;
-    text-indent: 15px;
-}
-
-.search .search-keyword,
-.search a:hover {
-    color: var(--accent);
-}
-
-.search .search-keyword {
-    font-style: normal;
-    font-weight: 700;
-}
-
 .progress {
     background-color: var(--accent);
     height: 2px;
@@ -148,12 +128,14 @@ body, html {
 
 body {
     -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
     color: var(--textColor);
     font-family: var(--siteFont);
     font-size: var(--bodyFontSize);
     letter-spacing: 0;
     overflow-x: hidden;
     background-color: var(--background);
+    transition: background-color 0.3s ease;
 }
 
 .emoji {
@@ -182,13 +164,47 @@ li input[type=checkbox] {
     vertical-align: middle;
 }
 
+/* ==========================================================================
+   3. 组件样式 (Components)
+   ========================================================================== */
+
+/* --- 搜索框 --- */
+.search {
+    border-bottom: none!important;
+}
+
+.search .input-wrap {
+    margin-top: 20px!important;
+}
+
+.search input {
+    border: 1px solid var(--borderColor)!important;
+    background-color: var(--background)!important;
+    margin: 0 auto;
+    color: var(--textColor);
+    width: 90%!important;
+    border-radius: 15px;
+    text-indent: 15px;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.search .search-keyword,
+.search a:hover {
+    color: var(--accent);
+}
+
+.search .search-keyword {
+    font-style: normal;
+    font-weight: 700;
+}
+
+/* --- 顶部导航 --- */
 .app-nav {
     margin: 25px 60px 0 0;
     position: absolute;
     right: 0;
     text-align: right;
     z-index: 10;
-    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .app-nav.no-badge {
@@ -207,6 +223,8 @@ li input[type=checkbox] {
 .app-nav li, .app-nav ul {
     display: inline-block;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .app-nav a {
@@ -234,9 +252,8 @@ li input[type=checkbox] {
 }
 
 .app-nav li ul {
-    background-color: #fff;
-    border: 1px solid;
-    border-color: #ddd #ddd #ccc;
+    background-color: var(--background);
+    border: 1px solid var(--borderColor);
     border-radius: 4px;
     box-sizing: border-box;
     display: none;
@@ -248,6 +265,7 @@ li input[type=checkbox] {
     text-align: left;
     top: 100%;
     white-space: nowrap;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .app-nav li ul li {
@@ -273,6 +291,7 @@ li input[type=checkbox] {
     display: block;
 }
 
+/* --- GitHub 角标 --- */
 .github-corner {
     border-bottom: 0;
     position: fixed;
@@ -280,7 +299,6 @@ li input[type=checkbox] {
     text-decoration: none;
     top: 0;
     z-index: 1;
-    transition: fill 0.3s ease;
 }
 
 .github-corner:hover .octo-arm {
@@ -292,8 +310,24 @@ li input[type=checkbox] {
     fill: var(--accent);
     height: 70px;
     width: 70px;
+    transition: fill 0.3s ease;
 }
 
+@keyframes octocat-wave {
+    0%, to {
+        transform: rotate(0);
+    }
+    20%, 60% {
+        transform: rotate(-25deg);
+    }
+    40%, 80% {
+        transform: rotate(10deg);
+    }
+}
+
+/* ==========================================================================
+   4. 布局 (Layout)
+   ========================================================================== */
 main {
     display: block;
     position: relative;
@@ -320,6 +354,7 @@ main.hidden {
     text-decoration: underline;
 }
 
+/* --- 侧边栏 --- */
 .sidebar {
     border-right: 1px solid var(--borderColor);
     overflow-y: auto;
@@ -328,11 +363,14 @@ main.hidden {
     top: 0;
     bottom: 0;
     left: 0;
-    transition: transform .25s ease-out, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    transition: transform .25s ease-out, background-color 0.3s ease, border-color 0.3s ease;
     width: var(--sidebarWidth);
     z-index: 20;
     color: var(--textColor);
     background-color: var(--background);
+    /* 为 Firefox 添加滚动条样式 */
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
 .sidebar > h1 {
@@ -340,7 +378,6 @@ main.hidden {
     font-size: 1.5rem;
     font-weight: 300;
     text-align: center;
-    transition: color 0.3s ease;
 }
 
 .sidebar > h1 a {
@@ -364,70 +401,13 @@ main.hidden {
 
 .sidebar li > p {
     font-weight: 700;
-}
-
-.sidebar::-webkit-scrollbar {
-    width: 6px;
-}
-.sidebar::-webkit-scrollbar-track {
-    background: transparent;
-}
-.sidebar::-webkit-scrollbar-thumb {
-    background: var(--scrollbar-thumb);
-    border-radius: 4px;
-}
-.sidebar:hover::-webkit-scrollbar-thumb {
-    background: var(--scrollbar-thumb-hover);
-}
-
-
-.sidebar-toggle {
-    background-color: transparent;
-    border: 0;
-    outline: none;
-    padding: 10px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-    transition: opacity .3s;
-    width: calc(var(--sidebarWidth) - 16px);
-    z-index: 30;
-    cursor: pointer;
-}
-
-.sidebar-toggle:hover .sidebar-toggle-button {
-    opacity: .4;
-}
-
-.sidebar-toggle span {
-    background-color: var(--accent);
-    display: block;
-    margin-bottom: 4px;
-    width: 16px;
-    height: 2px;
-    transition: background-color 0.3s ease;
-}
-
-body.sticky .sidebar, body.sticky .sidebar-toggle {
-    position: fixed;
-}
-
-.content {
-    padding-top: 60px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: var(--sidebarWidth);
-    transition: left .25s ease, background-color 0.3s ease, color 0.3s ease;
-    background-color: var(--background);
-    color: var(--textColor);
+    margin: 6px 0;
 }
 
 .sidebar ul {
     list-style: none;
     padding-left: 15px; 
+    margin: 0;
 }
 
 .sidebar li {
@@ -480,14 +460,10 @@ body.sticky .sidebar, body.sticky .sidebar-toggle {
   border-left-color: var(--sidebar-active-child-border);
 }
 
-.sidebar li.collapsed > ul {
-    display: none;
-}
-
 .sidebar li.has-children > a::after {
     content: '›';
     position: absolute;
-    right: 25px; /* 调整位置以适应右侧边框 */
+    right: 25px;
     top: 50%;
     transform: translateY(-50%) rotate(0deg);
     font-size: 20px;
@@ -502,12 +478,74 @@ body.sticky .sidebar, body.sticky .sidebar-toggle {
     transform: translateY(-50%) rotate(90deg);
 }
 
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+}
+.sidebar:hover::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-hover);
+}
+
+/* --- 侧边栏开关 --- */
+.sidebar-toggle {
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    transition: opacity .3s;
+    width: calc(var(--sidebarWidth) - 16px);
+    z-index: 30;
+    cursor: pointer;
+}
+
+.sidebar-toggle:hover .sidebar-toggle-button {
+    opacity: .4;
+}
+
+.sidebar-toggle span {
+    background-color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+    width: 16px;
+    height: 2px;
+    transition: background-color 0.3s ease;
+}
+
+body.sticky .sidebar, body.sticky .sidebar-toggle {
+    position: fixed;
+}
+
+/* --- 内容区域 --- */
+.content {
+    padding-top: 60px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: var(--sidebarWidth);
+    transition: left .25s ease;
+    background-color: var(--background);
+    color: var(--textColor);
+}
+
+/* ==========================================================================
+   5. Markdown 内容样式 (Markdown Content)
+   ========================================================================== */
 .markdown-section {
     margin: 0 auto;
     max-width: 90%;
     padding: 30px 15px 40px;
     position: relative;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .markdown-section>* {
@@ -517,269 +555,6 @@ body.sticky .sidebar, body.sticky .sidebar-toggle {
 
 .markdown-section>:first-child {
     margin-top: 0!important;
-}
-
-.markdown-section hr {
-    border: none;
-    border-bottom: 1px solid #eee;
-    margin: 2em 0;
-}
-
-.markdown-section iframe {
-    border: 1px solid #eee;
-    width: 1px;
-    min-width: 100%;
-}
-
-.markdown-section table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    display: block;
-    margin-bottom: 1rem;
-    overflow: auto;
-    width: 100%;
-}
-
-.markdown-section th {
-    font-weight: 700;
-}
-
-.markdown-section td, .markdown-section th {
-    border: 1px solid #ddd;
-    padding: 6px 13px;
-}
-
-.markdown-section tr {
-    border-top: 1px solid #ccc;
-}
-
-.markdown-section p.tip, .markdown-section tr:nth-child(2n) {
-    background-color: var(--codeBackgroundColor);
-    transition: background-color 0.3s ease;
-}
-
-.markdown-section p.tip {
-    border-bottom-right-radius: 2px;
-    border-left: 4px solid #f66;
-    border-top-right-radius: 2px;
-    margin: 2em 0;
-    padding: 12px 24px 12px 30px;
-    position: relative;
-}
-
-.markdown-section p.tip:before {
-    background-color: #f66;
-    border-radius: 100%;
-    color: #fff;
-    content: "!";
-    font-family: Dosis, Source Sans Pro, Helvetica Neue, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    left: -12px;
-    line-height: 20px;
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    text-align: center;
-    top: 14px;
-}
-
-.markdown-section p.tip code {
-    background-color: #efefef;
-}
-
-.markdown-section p.tip em {
-    color: #34495e;
-}
-
-.markdown-section p.warn {
-    background: rgba(66,185,131,.1);
-    border-radius: 2px;
-    padding: 1rem;
-}
-
-.markdown-section ul.task-list>li {
-    list-style-type: none;
-}
-
-body.close .sidebar {
-    transform: translateX(calc(var(--sidebarWidth) * -1));
-}
-
-body.close .sidebar-toggle {
-    width: auto;
-}
-
-body.close .content {
-    left: 0;
-}
-
-@media print {
-    .app-nav, .github-corner, .sidebar, .sidebar-toggle {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    /* 1. 沿用 Docsify 的默认侧边栏滑出逻辑 */
-    /* Docsify 会给 body 添加 .close 类来控制侧边栏 */
-    /* 侧边栏默认在屏幕外 */
-    .sidebar {
-        left: calc(var(--sidebarWidth) * -1);
-        transition: transform .25s ease-out;
-    }
-    /* 当 body.close 时，侧边栏滑入 */
-    body.close .sidebar {
-        transform: translateX(var(--sidebarWidth));
-    }
-    
-    /* 2. 确保 Docsify 的切换按钮在最上层 */
-    .sidebar-toggle {
-        z-index: 101;
-    }
-
-    
-    /* 5. 确保内容区不被错误移动 */
-    .content {
-        position: static;
-        left: 0;
-        max-width: 100vw;
-        transition: none; /* 内容区不需要移动动画 */
-    }
-
-    body.close .content {
-        /* 确保内容区在侧边栏滑出时保持不动 */
-        transform: none;
-    }
-
-    /* 6. 隐藏桌面端的元素 */
-    .app-nav, .github-corner {
-        display: none;
-    }
-}
-
-@keyframes octocat-wave {
-    0%, to {
-        transform: rotate(0);
-    }
-    20%, 60% {
-        transform: rotate(-25deg);
-    }
-    40%, 80% {
-        transform: rotate(10deg);
-    }
-}
-
-section.cover {
-    align-items: center;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    display: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-section.cover.show {
-    display: flex;
-    background: var(--coverBackground)!important;
-}
-
-section.cover.has-mask .mask {
-    background-color: #fff;
-    opacity: .8;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-}
-
-section.cover .cover-main {
-    flex: 1;
-    margin: -20px 16px 0;
-    text-align: center;
-    z-index: 1;
-}
-
-section.cover a {
-    color: inherit;
-}
-
-section.cover a, section.cover a:hover {
-    text-decoration: none;
-}
-
-section.cover p {
-    line-height: 1.5rem;
-    margin: 1em 0;
-}
-
-section.cover h1 {
-    color: inherit;
-    font-size: 2.5rem;
-    font-weight: 300;
-    margin: .625rem 0 2.5rem;
-    position: relative;
-    text-align: center;
-}
-
-section.cover h1 a {
-    display: block;
-}
-
-section.cover h1 small {
-    bottom: -.4375rem;
-    font-size: 1rem;
-    position: absolute;
-}
-
-section.cover blockquote {
-    font-size: 1.5rem;
-    text-align: center;
-}
-
-section.cover ul {
-    line-height: 1.8;
-    list-style-type: none;
-    margin: 1em auto;
-    max-width: 500px;
-}
-
-section.cover .cover-main>p:last-child a {
-    border-radius: 2rem;
-    border: 1px solid var(--accent);
-    box-sizing: border-box;
-    color: var(--accent);
-    display: inline-block;
-    font-size: 1.05rem;
-    letter-spacing: .1rem;
-    margin: .5rem 1rem;
-    padding: .75em 2rem;
-    text-decoration: none;
-    transition: all .15s ease;
-}
-
-section.cover .cover-main>p:last-child a:last-child {
-    background-color: var(--accent);
-    color: #fff;
-}
-
-section.cover .cover-main>p:last-child a:last-child:hover {
-    color: inherit;
-    opacity: .8;
-}
-
-section.cover .cover-main>p:last-child a:hover {
-    color: inherit;
-}
-
-section.cover blockquote>p>a {
-    border-bottom: 2px solid var(--accent);
-    transition: color .3s;
-}
-
-section.cover blockquote>p>a:hover {
-    color: var(--accent);
 }
 
 .markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section strong {
@@ -792,7 +567,6 @@ section.cover blockquote>p>a:hover {
     color: var(--accent);
     font-weight: 600;
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 
 .markdown-section h1 {
@@ -803,6 +577,9 @@ section.cover blockquote>p>a:hover {
 .markdown-section h2 {
     font-size: 1.75rem;
     margin: 45px 0 .8rem;
+    border-bottom: 1px solid var(--borderColor);
+    padding-bottom: .3rem;
+    transition: border-color 0.3s ease;
 }
 
 .markdown-section h3 {
@@ -836,6 +613,96 @@ section.cover blockquote>p>a:hover {
     padding-left: 1.5rem;
 }
 
+.markdown-section hr {
+    border: none;
+    border-bottom: 1px solid var(--borderColor);
+    margin: 2em 0;
+    transition: border-color 0.3s ease;
+}
+
+.markdown-section iframe {
+    border: 1px solid var(--borderColor);
+    width: 1px;
+    min-width: 100%;
+    margin: 1em 0;
+    transition: border-color 0.3s ease;
+}
+
+.markdown-section table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: block;
+    margin-bottom: 1rem;
+    overflow: auto;
+    width: 100%;
+}
+
+.markdown-section th {
+    font-weight: 700;
+}
+
+.markdown-section td, .markdown-section th {
+    border: 1px solid var(--borderColor);
+    padding: 6px 13px;
+    transition: border-color 0.3s ease;
+}
+
+.markdown-section tr {
+    border-top: 1px solid var(--borderColor);
+    transition: border-color 0.3s ease;
+}
+
+.markdown-section tr:nth-child(2n) {
+    background-color: var(--codeBackgroundColor);
+    transition: background-color 0.3s ease;
+}
+
+.markdown-section p.tip {
+    border-bottom-right-radius: 2px;
+    border-left: 4px solid #f66;
+    border-top-right-radius: 2px;
+    margin: 2em 0;
+    padding: 12px 24px 12px 30px;
+    position: relative;
+    background-color: var(--codeBackgroundColor);
+    transition: background-color 0.3s ease;
+}
+
+.markdown-section p.tip:before {
+    background-color: #f66;
+    border-radius: 100%;
+    color: #fff;
+    content: "!";
+    font-family: Dosis, Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    left: -12px;
+    line-height: 20px;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    top: 14px;
+}
+
+.markdown-section p.tip code {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.markdown-section p.tip em {
+    color: var(--textColor);
+}
+
+.markdown-section p.warn {
+    background: rgba(66,185,131,.1);
+    border-radius: 2px;
+    padding: 1rem;
+}
+
+.markdown-section ul.task-list>li {
+    list-style-type: none;
+}
+
 .markdown-section blockquote {
     border-left: 4px solid var(--accent);
     color: var(--blockQuoteColor);
@@ -849,10 +716,6 @@ section.cover blockquote>p>a:hover {
     margin-left: 0;
 }
 
-.markdown-section iframe {
-    margin: 1em 0;
-}
-
 .markdown-section em {
     color: #7f8c8d;
 }
@@ -860,18 +723,14 @@ section.cover blockquote>p>a:hover {
 .markdown-section code {
     border-radius: 2px;
     color: var(--highlightColor);
+    background-color: var(--codeBackgroundColor);
+    font-family: var(--codeFontFamily);
     font-size: .9rem;
     margin: 0 2px;
     padding: 3px 5px;
     white-space: pre-wrap;
     font-weight: 700;
     transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.markdown-section code, .markdown-section pre {
-    background-color: var(--codeBackgroundColor);
-    font-family: var(--codeFontFamily);
-    transition: background-color 0.3s ease;
 }
 
 .markdown-section pre {
@@ -883,99 +742,17 @@ section.cover blockquote>p>a:hover {
     padding: 0 1.4rem;
     position: relative;
     word-wrap: normal;
-}
-
-.token.cdata, .token.comment, .token.doctype, .token.prolog {
-    color: #8e908c;
-}
-
-.token.namespace {
-    opacity: .7;
-}
-
-.token.boolean, .token.number {
-    color: #c76b29;
-}
-
-.token.punctuation {
-    color: #525252;
-}
-
-.token.property {
-    color: #c08b30;
-}
-
-.token.tag {
-    color: #2973b7;
-}
-
-.token.string {
-    color: var(--accent);
-    transition: color 0.3s ease;
-}
-
-.token.selector {
-    color: #6679cc;
-}
-
-.token.attr-name {
-    color: #2973b7;
-}
-
-.language-css .token.string, .style .token.string, .token.entity, .token.url {
-    color: #22a2c9;
-}
-
-.token.attr-value, .token.control, .token.directive, .token.unit {
-    color: var(--accent);
-    transition: color 0.3s ease;
-}
-
-.token.function, .token.keyword {
-    color: #e96900;
-}
-
-.token.atrule, .token.regex, .token.statement {
-    color: #22a2c9;
-}
-
-.token.placeholder, .token.variable {
-    color: #3d8fd1;
-}
-
-.token.deleted {
-    text-decoration: line-through;
-}
-
-.token.inserted {
-    border-bottom: 1px dotted #202746;
-    text-decoration: none;
-}
-
-.token.italic {
-    font-style: italic;
-}
-
-.token.bold, .token.important {
-    font-weight: 700;
-}
-
-.token.important {
-    color: #c94922;
-}
-
-.token.entity {
-    cursor: help;
+    background-color: var(--codeBackgroundColor);
+    transition: background-color 0.3s ease;
 }
 
 .markdown-section pre>code {
     -moz-osx-font-smoothing: initial;
     -webkit-font-smoothing: initial;
-    background-color: var(--codeBackgroundColor);
+    background-color: transparent;
     border-radius: 2px;
     color: var(--codeTextColor);
     display: block;
-    font-family: Roboto Mono, Monaco, courier, monospace;
     font-size: .8rem;
     line-height: inherit;
     margin: 0 2px;
@@ -983,19 +760,11 @@ section.cover blockquote>p>a:hover {
     overflow: inherit;
     padding: 2.2em 5px;
     white-space: inherit;
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 .markdown-section code:after, .markdown-section code:before {
     letter-spacing: .05rem;
-}
-
-code .token {
-    -moz-osx-font-smoothing: initial;
-    -webkit-font-smoothing: initial;
-    min-height: 1.5rem;
-    position: relative;
-    left: auto;
 }
 
 pre:after {
@@ -1013,32 +782,304 @@ pre:after {
     transition: color 0.3s ease;
 }
 
-#theme-toggle {
-    position: fixed; /* 固定在视窗的固定位置 */
-    top: 15px;
-    right: 15px;
-    z-index: 102; /* 确保它在最上层 */
+/* ==========================================================================
+   6. 语法高亮 (Syntax Highlighting)
+   ========================================================================== */
+code .token {
+    -moz-osx-font-smoothing: initial;
+    -webkit-font-smoothing: initial;
+    min-height: 1.5rem;
+    position: relative;
+    left: auto;
+}
+.token.cdata, .token.comment, .token.doctype, .token.prolog {
+    color: #8e908c;
+}
+.token.namespace {
+    opacity: .7;
+}
+.token.boolean, .token.number {
+    color: #c76b29;
+}
+.token.punctuation {
+    color: #525252;
+}
+.token.property {
+    color: #c08b30;
+}
+.token.tag {
+    color: #2973b7;
+}
+.token.string {
+    color: var(--accent);
+}
+.token.selector {
+    color: #6679cc;
+}
+.token.attr-name {
+    color: #2973b7;
+}
+.language-css .token.string, .style .token.string, .token.entity, .token.url {
+    color: #22a2c9;
+}
+.token.attr-value, .token.control, .token.directive, .token.unit {
+    color: var(--accent);
+}
+.token.function, .token.keyword {
+    color: #e96900;
+}
+.token.atrule, .token.regex, .token.statement {
+    color: #22a2c9;
+}
+.token.placeholder, .token.variable {
+    color: #3d8fd1;
+}
+.token.deleted {
+    text-decoration: line-through;
+}
+.token.inserted {
+    border-bottom: 1px dotted #202746;
+    text-decoration: none;
+}
+.token.italic {
+    font-style: italic;
+}
+.token.bold, .token.important {
+    font-weight: 700;
+}
+.token.important {
+    color: #c94922;
+}
+.token.entity {
+    cursor: help;
+}
+
+/* ==========================================================================
+   7. 封面页 (Cover Page)
+   ========================================================================== */
+section.cover {
+    align-items: center;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: none;
+    background: var(--coverBackground);
+}
+
+section.cover.show {
+    display: flex;
+}
+
+section.cover.has-mask .mask {
+    background-color: #fff;
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
+section.cover .cover-main {
+    flex: 1;
+    margin: -20px 16px 0;
+    text-align: center;
+    z-index: 1;
+}
+
+section.cover a {
+    color: inherit;
+    text-decoration: none;
+}
+
+section.cover p {
+    line-height: 1.5rem;
+    margin: 1em 0;
+}
+
+section.cover h1 {
+    color: inherit;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin: .625rem 0 2.5rem;
+    position: relative;
+    text-align: center;
+}
+
+section.cover h1 a {
+    display: block;
+}
+
+section.cover h1 small {
+    bottom: -.4375rem;
+    font-size: 1rem;
+    position: absolute;
+}
+
+section.cover blockquote {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 1em 0;
+}
+
+section.cover ul {
+    line-height: 1.8;
+    list-style-type: none;
+    margin: 1em auto;
+    max-width: 500px;
+    padding: 0;
+}
+
+section.cover .cover-main>p:last-child a {
+    border-radius: 2rem;
+    border: 1px solid var(--accent);
+    box-sizing: border-box;
+    color: var(--accent);
+    display: inline-block;
+    font-size: 1.05rem;
+    letter-spacing: .1rem;
+    margin: .5rem 1rem;
+    padding: .75em 2rem;
+    text-decoration: none;
+    transition: all .15s ease;
+}
+
+section.cover .cover-main>p:last-child a:last-child {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+section.cover .cover-main>p:last-child a:last-child:hover {
+    color: #fff;
+    opacity: .8;
+}
+
+section.cover .cover-main>p:last-child a:hover {
+    color: var(--accent);
+    background-color: rgba(var(--accent-rgb), 0.1);
+}
+
+section.cover blockquote>p>a {
+    border-bottom: 2px solid var(--accent);
+    transition: color .3s;
+}
+
+section.cover blockquote>p>a:hover {
+    color: var(--accent);
+}
+
+/* ==========================================================================
+   8. 响应式与特定状态 (Responsive & States)
+   ========================================================================== */
+body.close .sidebar {
+    transform: translateX(calc(var(--sidebarWidth) * -1));
+}
+
+body.close .sidebar-toggle {
+    width: auto;
+}
+
+body.close .content {
+    left: 0;
+}
+
+@media print {
+    .app-nav, .github-corner, .sidebar, .sidebar-toggle {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        left: calc(var(--sidebarWidth) * -1);
+        transition: transform .25s ease-out;
+    }
+
+    body.close .sidebar {
+        transform: translateX(var(--sidebarWidth));
+    }
     
-    /* 移除背景和尺寸，使其成为一个透明的定位容器 */
+    .sidebar-toggle {
+        z-index: 101;
+    }
+    
+    .content {
+        position: static;
+        left: 0;
+        max-width: 100vw;
+        transition: none;
+    }
+
+    body.close .content {
+        transform: none;
+    }
+
+    .app-nav, .github-corner {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   9. 主题切换按钮 (Theme Toggle Button)
+   ========================================================================== */
+#theme-toggle {
+    position: fixed;
+    top: 25px;
+    right: 30px;
+    z-index: 102;
+    
+    /* 样式重置，使其表现得像一个图标容器 */
     background: transparent;
     border: none;
-    width: auto;
-    height: auto;
+    padding: 5px; /* 增加点击区域 */
     cursor: pointer;
     user-select: none;
-    padding: 5px; /* 增加一点内边距，扩大点击区域 */
+    border-radius: 50%;
+    line-height: 0;
 }
 
 #theme-toggle svg {
     width: 25px;
     height: 25px;
     fill: var(--accent);
-    /* 将过渡效果应用在图标本身 */
     transition: all 0.3s ease;
-    display: block; /* 确保SVG表现一致 */
+    display: block;
 }
 
 #theme-toggle:hover svg {
     opacity: 0.7;
     transform: scale(1.15) rotate(5deg);
+}
+
+/* ==========================================================================
+   10. 移动端体验优化 (Mobile Experience Enhancements)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+  #theme-toggle {
+    /* 增大内边距，从而扩大点击区域 */
+    padding: 10px;
+    /* 调整位置，避免离屏幕边缘太近 */
+    top: 10px;
+    right: 10px;
+  }
+  
+  #theme-toggle svg {
+    /* 增大图标本身的尺寸 */
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* ==========================================================================
+   11. 插件回退样式 (Plugin Fallback Styles)
+   ========================================================================== */
+/* 当 MathJax 加载失败时，为数学公式提供的回退样式 */
+.math-fallback {
+  background-color: var(--codeBackgroundColor);
+  color: var(--highlightColor);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: var(--codeFontFamily);
+  font-weight: 600;
+  border: 1px solid var(--borderColor);
 }

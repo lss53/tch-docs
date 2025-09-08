@@ -1,15 +1,13 @@
 (function() {
   'use strict';
 
-  const install = function(hook, vm) {
-    // --- 1. 配置管理 (保持不变) ---
+  function install(hook, vm) {
     const defaultConfig = {
       defaultTheme: "light"
     };
     const userConfig = vm.config.theme || {};
     const config = { ...defaultConfig, ...userConfig };
-
-    // --- 2. 状态与核心函数 (保持不变) ---
+    
     let currentTheme;
 
     const setTheme = (theme) => {
@@ -17,8 +15,15 @@
         currentTheme = theme;
         localStorage.setItem("THEME", theme);
         document.body.setAttribute('data-theme', theme);
+        
+        // 动态更新按钮的 ARIA 标签，为屏幕阅读器提供上下文
+        const themeToggle = document.querySelector('#theme-toggle');
+        if (themeToggle) {
+          themeToggle.setAttribute('aria-label', 
+            theme === 'light' ? '切换到暗色主题 (Switch to dark theme)' : '切换到亮色主题 (Switch to light theme)');
+        }
       } catch (error) {
-        console.error('Error setting theme:', error);
+        console.error('设置主题时出错:', error);
       }
     };
     
@@ -28,43 +33,32 @@
         const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         const initialTheme = savedTheme || (systemPrefersDark ? "dark" : config.defaultTheme);
         setTheme(initialTheme);
-      } catch (error) {
-        console.error('Error initializing theme:', error);
-        setTheme(config.defaultTheme);
+      } catch (error)
+      {
+        console.error('初始化主题时出错:', error);
+        setTheme(config.defaultTheme); // 出现错误时回退到默认主题
       }
     };
     
-    // --- 3. Docsify 钩子函数 (核心修改) ---
-
-    // 在 Docsify 初始化完成后，立即设置初始主题
+    // 在 Docsify 初始化时立即设置主题，避免闪烁
     hook.init(initTheme);
 
-    // 【修改】: 只在 doneEach 中处理主题切换按钮的事件监听
-    let eventListenerAttached = false;
-    hook.doneEach(function() {
-      if (eventListenerAttached) {
-        return;
-      }
-
-      // 获取页面上的静态主题切换按钮
+    // Docsify 初始化完成后，绑定一次性的事件监听器，效率更高
+    hook.ready(function() {
       const themeToggle = document.querySelector('#theme-toggle');
-
       if (!themeToggle) {
         return;
       }
       
-      // -- 只负责主题切换按钮的事件监听 --
       themeToggle.addEventListener('click', () => {
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         setTheme(newTheme);
       });
-      
-      // 设置标志位，防止重复绑定
-      eventListenerAttached = true;
     });
-  };
+  }
   
   // 安全地将插件注册到 Docsify
-  window.$docsify = window.$docsify || {};
-  window.$docsify.plugins = (window.$docsify.plugins || []).concat(install);
+  if (window.$docsify) {
+    window.$docsify.plugins = [].concat(install, window.$docsify.plugins || []);
+  }
 })();
