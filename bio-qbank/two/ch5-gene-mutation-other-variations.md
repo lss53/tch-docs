@@ -57,7 +57,7 @@ DNA分子中发生碱基对的<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
 12. 染色体变异包括哪两种类型？
 <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>、<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
-13. 染色体结构变异的概念：
+13. 染色体变异的概念：
 体细胞或生殖细胞内染色体<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>或<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>的变化，称为染色体变异。
 
 14. 染色体数目变异的类型有哪两种？
