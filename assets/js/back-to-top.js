@@ -31,8 +31,8 @@
     hook.ready(function() {
       if (document.getElementById(config.id)) return;
 
-      const svgSize = Math.round(0.43 * config.size);
-      const svgMargin = Math.round(0.29 * config.size);
+      const svgSize = Math.round(0.5 * config.size);
+      const svgMargin = Math.round(0.25 * config.size);
       const isBodyContainer = vm.config.el === '#app' || vm.config.el === 'body';
       const scrollTarget = isBodyContainer ? window : document.querySelector(vm.config.el);
       const scrollContainer = isBodyContainer ? document.documentElement : scrollTarget;

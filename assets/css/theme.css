@@ -170,19 +170,19 @@ li input[type=checkbox] {
 
 /* --- 搜索框 --- */
 .search {
-    border-bottom: none!important;
+    border-bottom: none;
 }
 
 .search .input-wrap {
-    margin-top: 20px!important;
+    margin-top: 20px;
 }
 
 .search input {
-    border: 1px solid var(--borderColor)!important;
-    background-color: var(--background)!important;
+    border: 1px solid var(--borderColor);
+    background-color: var(--background);
+    width: 90%;
     margin: 0 auto;
     color: var(--textColor);
-    width: 90%!important;
     border-radius: 15px;
     text-indent: 15px;
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
