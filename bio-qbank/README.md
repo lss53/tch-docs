@@ -9,7 +9,15 @@
 - **适用人群**：感觉上课能听懂、平时会做题，但考试难以取得高分的学习者
 - **使用建议**：定期自我测验，反复巩固记忆，让知识真正内化
 
-## 联系
+### 目录
+
+- **必修2 遗传与进化**
+
+    - [第5章 基因突变及其他变异](two/ch5-gene-mutation-other-variations-answer.md)
+
+    - [第6章 生物的进化](two/ch6-biological-evolution.md)
+
+### 联系
 
 资源如有错误和侵权，请通过 [Issues](https://github.com/lss53/tch-docs/issues) 联系我们。
 

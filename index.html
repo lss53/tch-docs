@@ -1,44 +1,100 @@
 <!DOCTYPE html>
 <html lang="zh-CN" dir="ltr">
 <head>
+  <!-- SEO 与兼容性设置 -->
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta charset="UTF-8">
   <title>TchDocs</title>
+
+  <!-- 网站图标 -->
   <link rel="icon" href="_media/favicon.ico">
+
+  <!-- 解决主题闪烁问题的关键脚本 -->
+  <script>
+    (function() {
+      // 切换主题的核心函数，它会给 <body> 添加或移除 'dark' 类
+      function applyTheme(theme) {
+        if (theme === 'dark') {
+          document.body.classList.add('dark');
+        } else {
+          document.body.classList.remove('dark');
+        }
+      }
+
+      try {
+        // 1. 优先从本地存储获取用户之前的选择
+        var savedTheme = localStorage.getItem('THEME');
+        if (savedTheme) {
+          applyTheme(savedTheme);
+          return; // 如果有保存的选择，直接应用并退出
+        }
+
+        // 2. 如果没有保存的选择，则根据系统偏好设置
+        var osPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (osPreference) {
+          applyTheme('dark');
+        }
+      } catch (e) {
+        // 出错时忽略，保证页面正常渲染
+      }
+    })();
+  </script>
+
+  <!-- 性能优化：预连接到 CDN，加快资源加载速度 -->
   <link rel="preconnect" href="//cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
-  <!-- 官方主题 -->
+
+  <!-- 样式文件 -->
+  <!-- 您可以切换使用 Docsify 官方主题或自定义主题 -->
   <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css"> -->
   <link rel="stylesheet" href="assets/css/theme.css"/>
 </head>
+
 <body>
   <!-- 主题切换按钮：使用 button 元素以获得更好的语义和可访问性 -->
   <button id="theme-toggle" aria-label="切换主题">
-    <svg class="icon" viewBox="0 0 512 512" aria-hidden="true">
-      <path d="M8 256c0 136.966 111.033 248 248 248s248-111.034 248-248S392.966 8 256 8 8 119.033 8 256zm248 184V72c101.705.0 184 82.311 184 184 0 101.705-82.311 184-184 184z"></path>
+    <svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+      3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+      13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"></path>
     </svg>
   </button>
 
+  <!-- Docsify 渲染的核心挂载点 -->
+  <!-- 添加一个简单的加载提示，提升用户体验 -->
   <div id="app"></div>
 
+  <!-- Docsify 配置 -->
   <script>
     window.$docsify = {
-      name: 'TchDocs',
-      // repo: 'https://github.com/lss53/tch-docs',
-      // 加载 _sidebar.md
-      loadSidebar: true,
-      // loadNavbar: true,
+      //================================================================
+      // ◎ 核心配置
+      //================================================================
+      name: 'TchDocs', // 显示在侧边栏顶部的网站名称
+      // repo: 'https://github.com/lss53/tch-docs', // 设置后将在右上角显示 GitHub 角标
+      loadSidebar: true, // 加载自定义侧边栏 _sidebar.md
+      // loadNavbar: true, // 加载自定义导航栏 _navbar.md
+      subMaxLevel: 4, // 侧边栏目录最大深度
+      autoHeader: true, // 自动将 _sidebar.md 的顶级标题作为每一页的页眉
+      auto2top: true, // 切换页面后，自动滚动到页面顶部
+      mergeNavbar: true, // 在小屏幕上合并导航栏到侧边栏
+
+      //================================================================
+      // ◎ 别名配置 (Alias)
+      //================================================================
       alias: {
         // --- 1. 侧边栏共享规则 ---
-        // 当访问 bio-qbank 目录下的任何页面时，都加载 /bio-qbank/_sidebar.md
+        // 作用：让一个大分类下的所有页面共享同一个侧边栏文件，避免重复维护。
+        // 示例：当访问 /bio-qbank/下的任何页面时，都统一加载 /bio-qbank/_sidebar.md
         '/bio-qbank/.*/_sidebar.md': '/bio-qbank/_sidebar.md',
-        // 当访问 bio-tpapers 目录下的任何页面时，都加载 /bio-tpapers/_sidebar.md
         '/bio-tpapers/.*/_sidebar.md': '/bio-tpapers/_sidebar.md',
-        // 当访问 life 目录下的任何页面时，都加载 /life/_sidebar.md
+        '/coding/.*/_sidebar.md': '/coding/_sidebar.md',
         '/life/.*/_sidebar.md': '/life/_sidebar.md',
 
-        // --- 2. URL 缩写规则 ---
+        // --- 2. URL 缩写（美化）规则 ---
+        // 作用：用更短的路径访问实际存放在深层目录的文件。
+        // 示例：访问 /xone/some-page 实际上会加载 /bio-qbank/xone/some-page.md
         // bio-qbank (题库)
         '/one/(.*)': '/bio-qbank/one/$1',
         '/two/(.*)': '/bio-qbank/two/$1',
@@ -48,68 +104,80 @@
 
         // bio-tpapers (试卷)
         '/gk/(.*)': '/bio-tpapers/gk/$1',
-        '/kd/(.*)': '/bio-tpapers/kd/$1'
+        '/kd/(.*)': '/bio-tpapers/kd/$1',
+        
+        // coding (编程)
+        '/python/(.*)': '/coding/python/$1'
       },
-      // 侧边栏目录最大层级
-      subMaxLevel: 4,
-      //自动显示标题
-      autoHeader: true,
-      //自动跳转到页面顶部
-      auto2top: true,
-      //小屏设备下合并导航栏到侧边栏
-      mergeNavbar: true,
-      // 搜索插件配置
+
+      //================================================================
+      // ◎ 插件配置
+      //================================================================
+
+      // 主题切换插件 (theme-toggle)
+      theme: {
+        defaultTheme: 'light' // 或 'dark'
+      },
+
+      // 搜索插件 (search)
       search: {
         placeholder: '输入关键字搜索',
         noData: '没有找到结果!',
-        depth: 3,
+        depth: 3, // 搜索标题的最大层级
       },
-      // 返回顶部插件配置
+      
+      // 图片缩放插件 (zoom-image)
+      zoomImage: {
+        // 默认配置已足够好用，通常无需额外设置
+        // options: {
+        //   bgColor: 'rgba(0,0,0,0.8)'
+        // }
+      },
+      
+      // 返回顶部插件 (back-to-top) - 自定义插件
       backToTop: {
-      /**
-       * @按钮的背景颜色。
-       * @example 'var(--accent)' // 使用 CSS 变量，与 Docsify 主题色保持一致
-       */
-        backgroundColor: 'var(--accent)',
-        textColor: '#ffffff', // 按钮内部 SVG 图标的颜色
-        cornerOffset: 25, // 按钮距离页面右下角的偏移量（单位：像素）
-        scrollDuration: 500, // 点击按钮后，页面滚动回顶部的动画持续时间（单位：毫秒）
-        /**
-         * @页面向下滚动超过该值（单位：像素）后，按钮才会显示。
-         * @推荐值为 100 到 500，避免在页面刚开始滚动时就出现，提升用户体验。
-         */
-        showWhenScrollTopIs: 300,
-        size: 40 // 圆形按钮的直径
+        backgroundColor: 'var(--accent)', // 按钮背景色，使用CSS变量以匹配主题
+        textColor: '#ffffff', // 按钮图标颜色
+        cornerOffset: 25, // 距离右下角的偏移量 (px)
+        scrollDuration: 500, // 滚动动画时长 (ms)
+        showWhenScrollTopIs: 300, // 页面向下滚动超过该值后显示 (px)
+        size: 40 // 按钮直径 (px)
       },
-      // 在这里对 MathJax 插件进行自定义配置 (可选)
+
+      // 数学公式插件 (MathJax) - 自定义插件
       mathjax: {
-        /* // 稍微放大公式
-        svg: {
-          scale: 0.95
-        },
-        // 添加一个新的 TeX 宏
+        // 如果需要，可以在这里对 MathJax 进行自定义配置
+        /*
         tex: {
           macros: {
-          // 定义 \R 来表示实数集符号
-          R: '\\mathbb{R}',
-          // 定义一个带参数的宏，例如 \norm{x} 表示 ||x||
-          norm: ['\\left\\| #1 \\right\\|', 1] 
+            R: '\\mathbb{R}', // 定义宏 \R
           }
-        }*/
+        }
+        */
       }
     };
   </script>
 
-  <!-- Docsify 核心库 -->
+  <!-- ================================================================ -->
+  <!-- ◎ 外部脚本加载 -->
+  <!-- 核心库必须最先加载 -->
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-  <!-- 搜索插件 -->
+
+  <!-- 插件脚本 -->
+  <!-- 语法高亮：按需加载语言以减小体积 -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.js"></script>
+  
+  <!-- 官方插件 -->
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  <!-- 主题插件 -->
-  <script src="assets/js/theme-toggle.js"></script>
-  <!-- MathJax 插件 -->
-  <script src="assets/js/mathjax.js"></script>
-  <!-- 返回顶部插件 -->
-  <script src="assets/js/back-to-top.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+
+  <!-- 自定义脚本（本地） -->
+  <script src="assets/js/theme-toggle.js"></script> <!-- 主题切换功能 -->
+  <script src="assets/js/mathjax.js"></script> <!-- MathJax数学公式支持 -->
+  <script src="assets/js/back-to-top.js"></script> <!-- 返回顶部功能 -->
   
 </body>
 </html>

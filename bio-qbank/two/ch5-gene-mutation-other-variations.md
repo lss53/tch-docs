@@ -2,7 +2,7 @@
 
 ## 第1节 基因突变和基因重组
 
-### 基础篇（60分以下必掌握）
+**基础篇（60分以下必掌握）**
 
 1. 变异可以分为哪两种类型？
     1. <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>：由<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>的改变而引起的变异；
@@ -37,7 +37,7 @@ DNA分子中发生碱基对的<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
     1. <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>：同源染色体上<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>的随着之间<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>的互换而发生交换；
     2. <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>：随着<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>的自由组合，<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>也自由组合。
 
-### 进阶篇（冲刺80分必掌握）
+**进阶篇（冲刺80分必掌握）**
 
 9. 除了有性生殖过程中的，广义上的基因重组还有哪些？
     1. <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>：R型菌在特定的生理状况下变成感受态（可以吸收周围环境RNA的状态），接受S型菌的DNA片段，并和自身DNA重新组合；
@@ -52,7 +52,7 @@ DNA分子中发生碱基对的<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
 
 ## 第2节 染色体变异
 
-### 基础篇（60分以下必掌握）
+**基础篇（60分以下必掌握）**
 
 12. 染色体变异包括哪两种类型？
 <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>、<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
@@ -88,7 +88,7 @@ DNA分子中发生碱基对的<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
 |常用方法|杂交和自交|①物理方法：紫外线、x射线及等；<br>②化学方法：亚硝酸盐、碱基类似物等|<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>；<br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>|<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>|转基因技术|
 |举例|培育杂交小麦、水稻|培育高产青霉素菌株|水稻的单倍体育种|培育三倍体无子西瓜|抗虫棉|
 
-### 进阶篇（冲刺80分必掌握）
+**进阶篇（冲刺80分必掌握）**
 
 19. 如何判断一个个体是否可育？
 判断<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>是否能正常进行，能正常进行的则为可育，反之则不可育。
