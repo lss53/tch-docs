@@ -1,4 +1,4 @@
-## Python 教程
+# Python 教程
 
 > The Zen of Python, by Tim Peters
 >
@@ -10,6 +10,6 @@
 
 ---
 
-## 文章列表
+### 文章列表 <!-- {docsify-ignore} -->
 
 - [Python网络爬虫入门指南](python/python-web-crawler-guide)
