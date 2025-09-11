@@ -339,7 +339,7 @@ main.hidden {
     top: 0;
     bottom: 0;
     inset-inline-start: 0; /* 使用逻辑属性 */
-    transition: transform .25s ease-out; /* 仅保留必要的 transform 过渡 */
+    transition: inset-inline-start .25s ease-out; /* 修改为对布局属性进行过渡 */
     width: var(--sidebarWidth);
     z-index: 20;
     color: var(--textColor);
@@ -492,6 +492,7 @@ body.sticky .sidebar, body.sticky .sidebar-toggle { position: fixed; }
     inset-inline-start: var(--sidebarWidth); /* 使用逻辑属性 */
     background-color: var(--background); /* 关键: 保持组件独立性 */
     color: var(--textColor);
+    transition: inset-inline-start .25s ease-out;
 }
 
 /* ==========================================================================
@@ -718,7 +719,7 @@ section.cover blockquote>p>a:hover { color: var(--accent); }
    8. 响应式与特定状态 (Responsive & States)
    ========================================================================== */
 body.close .sidebar {
-    transform: translateX(calc(var(--sidebarWidth) * -1));
+    inset-inline-start: calc(var(--sidebarWidth) * -1);
 }
 
 body.close .sidebar-toggle {
