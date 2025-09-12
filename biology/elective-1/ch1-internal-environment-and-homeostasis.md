@@ -38,7 +38,7 @@
 <u>①细胞内液、②血浆、③组织液、④淋巴液</u>
 
 <figure style="text-align: center;">
-  <img src="../_media/xone-ch1-1.3-fig-interstitial-plasma-lymph-exchange.png.png" alt="相互转化关系图" width="50%">
+  <img src="../_media/xone-ch1-1.3-fig-interstitial-plasma-lymph-exchange.png.png" alt="相互转化关系图" width="60%">
   <figcaption>图3: 相互转化关系图</figcaption>
 </figure>
 

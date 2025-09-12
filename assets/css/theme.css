@@ -500,7 +500,7 @@ body.sticky .sidebar, body.sticky .sidebar-toggle { position: fixed; }
    ========================================================================== */
 .markdown-section {
     margin: 0 auto;
-    max-width: min(90%, 80ch); /* 使用min()函数保证最佳阅读行长 */
+    max-width: min(90%, 100ch); /* 使用min()函数保证最佳阅读行长 */
     padding: var(--spacing-xl) var(--spacing-m) var(--spacing-xxl); /* 使用间距变量 */
     position: relative;
 }
