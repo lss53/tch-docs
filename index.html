@@ -79,39 +79,12 @@
       autoHeader: true, // 自动将 _sidebar.md 的顶级标题作为每一页的页眉
       auto2top: true, // 切换页面后，自动滚动到页面顶部
       mergeNavbar: true, // 在小屏幕上合并导航栏到侧边栏
+      relativePath: true, 
 
       //================================================================
       // ◎ 别名配置 (Alias)
       //================================================================
       alias: {
-        // --- 1. 侧边栏共享规则 ---
-        // 作用：让一个大分类下的所有页面共享同一个侧边栏文件，避免重复维护。
-        // 示例：当访问 /bio-qbank/下的任何页面时，都统一加载 /bio-qbank/_sidebar.md
-        '/bio-qbank/.*/_sidebar.md': '/bio-qbank/_sidebar.md',
-        '/bio-tpapers/.*/_sidebar.md': '/bio-tpapers/_sidebar.md',
-        '/coding/.*/_sidebar.md': '/coding/_sidebar.md',
-        '/life/.*/_sidebar.md': '/life/_sidebar.md',
-
-        // --- 2. URL 缩写（美化）规则 ---
-        // 作用：用更短的路径访问实际存放在深层目录的文件。
-        // 示例：访问 /xone/some-page 实际上会加载 /bio-qbank/xone/some-page.md
-        // bio-qbank (题库)
-        '/one/(.*)': '/bio-qbank/one/$1',
-        '/two/(.*)': '/bio-qbank/two/$1',
-        '/xone/(.*)': '/bio-qbank/xone/$1',
-        '/xtwo/(.*)': '/bio-qbank/xtwo/$1',
-        '/xthree/(.*)': '/bio-qbank/xthree/$1',
-
-        // bio-tpapers (试卷)
-        '/gk/(.*)': '/bio-tpapers/gk/$1',
-        '/kd/(.*)': '/bio-tpapers/kd/$1',
-        
-        // coding (编程)
-        '/python/(.*)': '/coding/python/$1',
-        
-        // life (生活)
-        '/health/(.*)': '/life/health/$1',
-        '/thoughts/(.*)': '/life/thoughts/$1'
       },
 
       //================================================================

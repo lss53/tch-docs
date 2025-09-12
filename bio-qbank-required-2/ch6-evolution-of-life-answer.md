@@ -113,7 +113,7 @@
 
 ## 填空版
 
-[戳这里](two/ch6-biological-evolution.md)!
+[戳这里](./ch6-evolution-of-life.md)!
 
 
 

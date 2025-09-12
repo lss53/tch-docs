@@ -113,7 +113,7 @@
 
 ## 答案
 
-[戳这里](two/ch6-biological-evolution-answer.md)!
+[戳这里](./ch6-evolution-of-life-answer.md)!
 
 
 

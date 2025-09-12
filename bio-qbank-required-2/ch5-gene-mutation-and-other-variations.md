@@ -131,4 +131,4 @@ DNA分子中发生碱基对的<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
 
 ## 答案
 
-[戳这里](two/ch5-gene-mutation-other-variations-answer.md)!
+[戳这里](./ch5-gene-mutation-and-other-variations-answer.md)!
