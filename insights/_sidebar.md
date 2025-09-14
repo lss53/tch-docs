@@ -1,7 +1,6 @@
 <!-- /insights/_sidebar.md -->
 
 - **生活指北 (Insights)**
-  - [返回主页](/)
   - [生活指北 · 总览](/insights/)
 
 - **分类**

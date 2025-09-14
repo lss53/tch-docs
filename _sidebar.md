@@ -4,5 +4,5 @@
 - **核心知识库**
 
   - [**高中生物 (Biology)**](/biology/)
-  - [**编程指南 (Programming)**](/programming/)
+  - [**编程指南 (Code)**](/code/)
   - [**生活指北 (Insights)**](/insights/)

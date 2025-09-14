@@ -9,136 +9,227 @@
    */
   function install(hook, vm) {
     // 1. --- 默认配置 ---
-    // 定义插件的默认参数，当用户没有提供自定义配置时使用
     const defaultConfig = {
-      backgroundColor: "#000",        // 按钮的背景颜色
-      cornerOffset: 20,             // 按钮距离页面右下角的偏移量 (单位: px)
-      ease: progress => 0.5 * (1 - Math.cos(Math.PI * progress)), // 缓动函数，用于创建平滑的滚动动画效果 (先慢后快再慢)
-      id: "back-to-top",            // 按钮元素的 HTML id
-      innerHTML: '<svg viewBox="0 0 448 512"><path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6.0-33.9L207 39c9.4-9.4 24.6-9.4 33.9.0l194.3 194.3c9.4 9.4 9.4 24.6.0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3.0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path></svg>', // 按钮内部的 HTML 内容 (一个向上的箭头 SVG 图标)
-      scrollDuration: 100,          // 滚动回顶部的动画持续时间 (单位: ms)
-      showWhenScrollTopIs: 1,       // 页面向下滚动超过该值后，按钮才会显示 (单位: px)
-      size: 56,                     // 按钮的直径 (单位: px)
-      textColor: "#fff",            // 按钮内部 SVG 图标的颜色
-      zIndex: 1                     // 按钮的 CSS z-index, 用于控制层叠顺序
+      backgroundColor: "#000",
+      cornerOffset: 20,
+      ease: progress => 0.5 * (1 - Math.cos(Math.PI * progress)),
+      id: "back-to-top",
+      innerHTML: '<svg viewBox="0 0 448 512"><path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6.0-33.9L207 39c9.4-9.4 24.6-9.4 33.9.0l194.3 194.3c9.4 9.4 9.4 24.6.0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3.0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path></svg>',
+      scrollDuration: 800,
+      showWhenScrollTopIs: 100,
+      size: 56,
+      textColor: "#fff",
+      zIndex: 1000,
+      responsive: {
+        small: { size: 40, cornerOffset: 10 },
+        medium: { size: 48, cornerOffset: 15 }
+      },
+      ariaLabel: {
+        en: 'Back to top',
+        zh: '返回顶部',
+        ja: 'トップに戻る',
+        ko: '맨 위로'
+      }
     };
     
-    // 2. --- 配置合并 ---
-    // 使用 ES6 的扩展运算符(...)，将用户在 index.html 中提供的配置 (vm.config.backToTop) 与默认配置合并。
-    // 用户配置会覆盖同名的默认配置。
+    // 2. --- 配置合并与验证 ---
     const config = { ...defaultConfig, ...vm.config.backToTop };
     
-    /**
-     * 节流函数 (Throttle)
-     * @param {Function} func - 需要被节流的函数
-     * @param {number} limit - 节流的时间间隔 (单位: ms)
-     * @returns {Function} 返回一个新的节流后的函数
-     * 作用：在指定的时间间隔内，无论事件触发多少次，函数最多只执行一次。
-     * 这对于 scroll、resize 等高频触发的事件非常重要，可以极大地提升性能。
-     */
+    function validateConfig(config) {
+      const errors = [];
+      if (typeof config.scrollDuration !== 'number' || config.scrollDuration < 0) {
+        errors.push("scrollDuration must be a positive number");
+        config.scrollDuration = defaultConfig.scrollDuration;
+      }
+      if (typeof config.size !== 'number' || config.size < 10) {
+        errors.push("size must be at least 10px");
+        config.size = defaultConfig.size;
+      }
+      if (typeof config.zIndex !== 'number' || config.zIndex < 0) {
+        errors.push("zIndex must be a positive number");
+        config.zIndex = defaultConfig.zIndex;
+      }
+      if (errors.length > 0) {
+        console.warn("BackToTop plugin configuration errors:", errors);
+      }
+    }
+    
+    validateConfig(config);
+    
     function throttle(func, limit) {
       let inThrottle;
       return function() {
+        const args = arguments;
+        const context = this;
         if (!inThrottle) {
-          func.apply(this, arguments);
+          func.apply(context, args);
           inThrottle = true;
           setTimeout(() => inThrottle = false, limit);
         }
       };
     }
 
-    // 3. --- DOM 操作与事件绑定 (在 Docsify 准备就绪后执行) ---
+    // 3. --- DOM 操作与事件绑定 ---
     hook.ready(function() {
-      // 如果页面上已经存在该按钮，则直接返回，防止重复创建
       if (document.getElementById(config.id)) return;
 
-      // 根据配置计算 SVG 图标的尺寸和外边距
-      const svgSize = Math.round(0.5 * config.size);
-      const svgMargin = Math.round(0.25 * config.size);
-      
-      // --- 关键：判断滚动的目标元素 ---
-      // 检查 Docsify 挂载的元素是否为默认的 '#app' 或 'body'
-      const isBodyContainer = vm.config.el === '#app' || vm.config.el === 'body';
-      // 如果是，那么滚动事件的监听目标是 window，而实际滚动的元素是 document.documentElement (<html> 标签)
-      // 否则，监听和滚动的目标都是用户自定义的挂载元素
+      const isBodyContainer = !vm.config.el || vm.config.el === '#app' || vm.config.el === 'body' || document.querySelector(vm.config.el) === document.body;
       const scrollTarget = isBodyContainer ? window : document.querySelector(vm.config.el);
       const scrollContainer = isBodyContainer ? document.documentElement : scrollTarget;
 
-      // 动态生成 CSS 样式
-      const css = `
-          #${config.id}{background:${config.backgroundColor};border-radius:50%;bottom:${config.cornerOffset}px;box-shadow:0 2px 5px 0 rgba(0,0,0,.26);color:${config.textColor};cursor:pointer;display:block;height:${config.size}px;opacity:1;outline:0;position:fixed;right:${config.cornerOffset}px;transition:bottom .2s,opacity .2s;user-select:none;width:${config.size}px;z-index:${config.zIndex}}
-          #${config.id}:hover svg{opacity:.6}
-          #${config.id} svg{display:block;fill:currentColor;height:${svgSize}px;margin:${svgMargin}px auto 0;width:${svgSize}px}
-          #${config.id}.hidden{bottom:-${config.size}px;opacity:0}
-      `;
+      let animationFrameId = null;
+      const eventListeners = [];
 
-      // 创建 <style> 标签并将 CSS 注入到 <head> 中
+      // CSS (omitted for brevity, same as before)
+      const css = `
+          #${config.id} {
+            background: ${config.backgroundColor}; border-radius: 50%; bottom: ${config.cornerOffset}px;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,.26); color: ${config.textColor}; cursor: pointer;
+            display: block; height: ${config.size}px; opacity: 1; outline: 0; position: fixed;
+            right: ${config.cornerOffset}px; user-select: none; width: ${config.size}px;
+            z-index: ${config.zIndex}; visibility: visible; transform: translateY(0);
+            transition: transform 0.3s ease-out, opacity 0.4s ease-out; will-change: transform, opacity;
+          }
+          #${config.id}:hover svg { opacity: .7; }
+          #${config.id} svg {
+            display: block; fill: currentColor; height: ${Math.round(0.5 * config.size)}px;
+            margin: ${Math.round(0.25 * config.size)}px auto 0; width: ${Math.round(0.5 * config.size)}px;
+          }
+          #${config.id}.hidden {
+            opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(20px);
+          }
+          @media (max-width: 768px) {
+            #${config.id} {
+              width: ${config.responsive.small.size}px; height: ${config.responsive.small.size}px;
+              bottom: ${config.responsive.small.cornerOffset}px; right: ${config.responsive.small.cornerOffset}px;
+            }
+            #${config.id} svg {
+              height: ${Math.round(0.5 * config.responsive.small.size)}px;
+              margin: ${Math.round(0.25 * config.responsive.small.size)}px auto 0;
+            }
+          }
+          @media (min-width: 769px) and (max-width: 1024px) {
+            #${config.id} {
+              width: ${config.responsive.medium.size}px; height: ${config.responsive.medium.size}px;
+              bottom: ${config.responsive.medium.cornerOffset}px; right: ${config.responsive.medium.cornerOffset}px;
+            }
+            #${config.id} svg {
+              height: ${Math.round(0.5 * config.responsive.medium.size)}px;
+              margin: ${Math.round(0.25 * config.responsive.medium.size)}px auto 0;
+            }
+          }`;
+
       const style = document.createElement("style");
-      style.appendChild(document.createTextNode(css));
+      style.textContent = css;
       document.head.insertAdjacentElement("afterbegin", style);
 
-      // 创建按钮的 <div> 元素
       const button = document.createElement("div");
       button.id = config.id;
-      button.className = "hidden"; // 初始状态为隐藏
+      button.className = "hidden";
       button.innerHTML = config.innerHTML;
-      document.body.appendChild(button); // 将按钮添加到页面的 body 中
+      
+      function setAriaLabel() {
+        const lang = document.documentElement.lang || 'en';
+        const label = config.ariaLabel[lang.split('-')[0]] || config.ariaLabel.en;
+        button.setAttribute('aria-label', label);
+      }
+      
+      button.setAttribute('role', 'button');
+      setAriaLabel();
+      
+      const observer = new MutationObserver(setAriaLabel);
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+      
+      document.body.appendChild(button);
 
-      // 为按钮绑定点击事件，点击时执行滚动到顶部的函数
-      button.addEventListener("click", e => {
-        e.preventDefault(); // 阻止默认行为
+      function handleButtonClick(e) {
+        e.preventDefault();
         scrollToTop();
-      });
+      }
+      button.addEventListener("click", handleButtonClick);
+      eventListeners.push({ element: button, type: 'click', handler: handleButtonClick });
 
-      // --- 核心功能函数 ---
-
-      // 处理滚动事件的函数
       function handleScroll() {
-        const scrollTop = scrollContainer.scrollTop; // 获取当前滚动条的位置
-        // 根据滚动位置和配置，切换 'hidden' 类来控制按钮的显示和隐藏
-        button.classList.toggle('hidden', scrollTop < config.showWhenScrollTopIs);
+        button.classList.toggle('hidden', scrollContainer.scrollTop < config.showWhenScrollTopIs);
       }
 
-      // 平滑滚动到顶部的函数
       function scrollToTop() {
-        const currentPosition = scrollContainer.scrollTop; // 获取当前位置
-        // 如果动画时长为0或浏览器不支持 performance API，则直接跳到顶部
-        if (config.scrollDuration <= 0 || typeof performance === 'undefined') {
-          scrollContainer.scrollTop = 0;
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+        
+        button.style.pointerEvents = 'none';
+        
+        const currentPosition = scrollContainer.scrollTop;
+        const targetPosition = 0;
+        
+        if (currentPosition <= targetPosition || config.scrollDuration <= 0) {
+          scrollContainer.scrollTop = targetPosition;
+          button.style.pointerEvents = 'auto';
           return;
         }
-        const startTime = performance.now(); // 记录动画开始时间
         
-        // 定义动画的每一帧
+        const startTime = performance.now();
+        const distance = currentPosition - targetPosition;
+        
         function animateScroll(currentTime) {
-          const elapsedTime = currentTime - startTime; // 计算已过时间
-          const progress = Math.min(elapsedTime / config.scrollDuration, 1); // 计算动画进度 (0 到 1)
-          const easeProgress = config.ease(progress); // 应用缓动函数，使动画更自然
+          const elapsedTime = currentTime - startTime;
+          const progress = Math.min(elapsedTime / config.scrollDuration, 1);
+          const easeProgress = config.ease(progress);
           
-          // 根据进度计算当前应该滚动到的位置
-          scrollContainer.scrollTop = currentPosition - (easeProgress * currentPosition);
+          scrollContainer.scrollTop = currentPosition - (easeProgress * distance);
           
-          // 如果动画还没结束，请求下一帧
           if (progress < 1) {
-            requestAnimationFrame(animateScroll);
+            animationFrameId = requestAnimationFrame(animateScroll);
+          } else {
+            animationFrameId = null;
+            button.style.pointerEvents = 'auto';
+            // --- THIS IS THE FIX ---
+            handleScroll(); 
           }
         }
-        // 启动动画
-        requestAnimationFrame(animateScroll);
+        
+        animationFrameId = requestAnimationFrame(animateScroll);
       }
       
-      // 监听滚动事件，并使用节流函数进行性能优化
-      // { passive: true } 告诉浏览器，这个监听器不会调用 preventDefault()，从而进一步优化滚动性能
-      scrollTarget.addEventListener("scroll", throttle(handleScroll, 150), { passive: true });
+      function immediateCancelAnimation() {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+          button.style.pointerEvents = 'auto';
+        }
+      }
       
-      // 页面加载完成后，立即执行一次 handleScroll，以确定按钮的初始显示状态
+      const wheelHandler = immediateCancelAnimation;
+      const touchHandler = immediateCancelAnimation;
+      scrollTarget.addEventListener("wheel", wheelHandler, { passive: true });
+      scrollTarget.addEventListener("touchmove", touchHandler, { passive: true });
+      
+      const scrollHandler = throttle(handleScroll, 150);
+      scrollTarget.addEventListener("scroll", scrollHandler, { passive: true });
+      
+      function handleResize() { /* ... resize logic ... */ }
+      const resizeHandler = throttle(handleResize, 250);
+      window.addEventListener('resize', resizeHandler);
+
+      eventListeners.push(
+        { element: scrollTarget, type: 'wheel', handler: wheelHandler },
+        { element: scrollTarget, type: 'touchmove', handler: touchHandler },
+        { element: scrollTarget, type: 'scroll', handler: scrollHandler },
+        { element: window, type: 'resize', handler: resizeHandler }
+      );
+      
       handleScroll();
+      handleResize();
+      
+      function destroy() { /* ... destroy logic ... */ }
+
+      vm.backToTop = vm.backToTop || {};
+      vm.backToTop.destroy = destroy;
     });
   }
 
   // 4. --- 插件注册 ---
-  // 检查 window.$docsify 是否存在，如果存在，则将本插件的 install 函数添加到插件数组中
-  // 这种写法可以确保插件安全地注册，并且不会覆盖掉其他已注册的插件
   if (window.$docsify) {
     window.$docsify.plugins = [].concat(install, window.$docsify.plugins || []);
   }

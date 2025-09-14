@@ -8,7 +8,7 @@
 <u>细胞内液、2/3、细胞外液、1/3</u>
 
 <figure style="text-align: center;">
-  <img src="../_media/xone-ch1-1.1-fig-body-fluid-schematic.png" alt="体液组成示意图" width="40%">
+  <img src="../_media/biology/elective-1/e1-ch1-1.1-fig-body-fluid-schematic.png" alt="体液组成示意图" width="40%">
   <figcaption>图1: 体液组成图</figcaption>
 </figure>
 
@@ -18,7 +18,7 @@
 <u>①血浆、②组织液、③淋巴液、④细胞外液、⑤细胞内液、⑥体液</u>
 
 <figure style="text-align: center;">
-  <img src="../_media/xone-ch1-1.2-fig-body-fluid-chart.png" alt="体液组成示意图" width="40%">
+  <img src="../_media/biology/elective-1/e1-ch1-1.2-fig-body-fluid-chart.png" alt="体液组成示意图" width="40%">
   <figcaption>图2: 体液组成示意图</figcaption>
 </figure>
 
@@ -38,7 +38,7 @@
 <u>①细胞内液、②血浆、③组织液、④淋巴液</u>
 
 <figure style="text-align: center;">
-  <img src="../_media/xone-ch1-1.3-fig-interstitial-plasma-lymph-exchange.png.png" alt="相互转化关系图" width="60%">
+  <img src="../_media/biology/elective-1/e1-ch1-1.3-fig-interstitial-plasma-lymph-exchange.png" alt="相互转化关系图" width="60%">
   <figcaption>图3: 相互转化关系图</figcaption>
 </figure>
 

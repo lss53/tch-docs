@@ -45,6 +45,13 @@
   <link rel="preconnect" href="//cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
 
+  <!-- 预连接到字体服务器，加速后续下载 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- 异步加载字体，使用 display=swap 避免渲染阻塞 -->
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Roboto+Mono&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
   <!-- 样式文件 -->
   <!-- 您可以切换使用 Docsify 官方主题或自定义主题 -->
   <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css"> -->

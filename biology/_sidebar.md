@@ -1,7 +1,6 @@
 <!-- /biology/_sidebar.md -->
 
 - **生物学 (Biology)**
-  - [返回主页](/)
   - [生物学 · 总览](/biology/)
 
 - **必修系列**
