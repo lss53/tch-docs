@@ -131,5 +131,5 @@ DNA分子中发生碱基对的<u>替换</u>、<u>增添</u>或<u>缺失</u>，�
 
 ## 填空版
 
-[戳这里](./ch5-gene-mutation-and-other-variations.md)!
+[戳这里](./r2-ch5-gene-mutation-and-other-variations.md)!
 

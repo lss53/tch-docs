@@ -6,7 +6,7 @@
 
 ---
 
-*   [第1章 种群及其动态](./ch1-population-and-dynamics.md)
-*   [第2章 群落及其演替](./ch2-community-and-succession.md)
-*   [第3章 生态系统及其稳定性](./ch3-ecosystem-and-stability.md)
-*   [第4章 人与环境](./ch4-humans-and-the-environment.md)
+*   [第1章 种群及其动态](./e2-ch1-population-and-dynamics.md)
+*   [第2章 群落及其演替](./e2-ch2-community-and-succession.md)
+*   [第3章 生态系统及其稳定性](./e2-ch3-ecosystem-and-stability.md)
+*   [第4章 人与环境](./e2-ch4-humans-and-the-environment.md)

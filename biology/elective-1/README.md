@@ -6,8 +6,8 @@
 
 ---
 
-*   [第1章 人体的内环境与稳态](./ch1-internal-environment-and-homeostasis.md)
-*   [第2章 神经调节](./ch2-nervous-regulation.md)
-*   [第3章 体液调节](./ch3-humoral-regulation.md)
-*   [第4章 免疫调节](./ch4-immune-regulation.md)
-*   [第5章 植物生命活动的调节](./ch5-plant-life-activity-regulation.md)
+*   [第1章 人体的内环境与稳态](./e1-ch1-internal-environment-and-homeostasis.md)
+*   [第2章 神经调节](./e1-ch2-nervous-regulation.md)
+*   [第3章 体液调节](./e1-ch3-humoral-regulation.md)
+*   [第4章 免疫调节](./e1-ch4-immune-regulation.md)
+*   [第5章 植物生命活动的调节](./e1-ch5-plant-life-activity-regulation.md)
