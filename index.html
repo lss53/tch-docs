@@ -56,6 +56,15 @@
   <!-- 您可以切换使用 Docsify 官方主题或自定义主题 -->
   <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css"> -->
   <link rel="stylesheet" href="assets/css/theme.css"/>
+
+  <!-- 为主题切换按钮添加初始隐藏样式和过渡效果 -->
+  <style>
+    #theme-toggle {
+      visibility: hidden; /* 默认隐藏 */
+      opacity: 0;         /* 默认全透明 */
+      transition: opacity 0.3s ease-in-out; /* 添加一个平滑的淡入效果 */
+    }
+  </style>
 </head>
 
 <body>

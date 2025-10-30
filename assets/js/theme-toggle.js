@@ -97,7 +97,11 @@
         // 如果在页面上找不到按钮，则直接返回，不做任何操作
         return;
       }
-      
+
+      // 当 Docsify 准备就绪时，修改按钮的样式使其可见
+      themeToggle.style.visibility = 'visible';
+      themeToggle.style.opacity = '1';
+
       // 为按钮绑定点击事件
       themeToggle.addEventListener('click', () => {
         // 计算新主题：如果当前是 'light'，则切换到 'dark'，反之亦然
