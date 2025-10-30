@@ -5,17 +5,15 @@
 **基础篇（60分以下必掌握）**
 
 1.  请填写体液的组成图：  
-<u>细胞内液、2/3、细胞外液、1/3</u>
+<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 <figure style="text-align: center;">
   <img src="../_media/biology/elective-1/e1-ch1-1.1-fig-body-fluid-schematic.png" alt="体液组成示意图" width="40%">
   <figcaption>图1: 体液组成图</figcaption>
 </figure>
 
-
-
 2.  请根据图片填写体液组成示意图：  
-<u>①血浆、②组织液、③淋巴液、④细胞外液、⑤细胞内液、⑥体液</u>
+<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 <figure style="text-align: center;">
   <img src="../_media/biology/elective-1/e1-ch1-1.2-fig-body-fluid-chart.png" alt="体液组成示意图" width="40%">
@@ -23,60 +21,59 @@
 </figure>
 
 3. 内环境的定义：
-由<u>细胞外液</u>构成的液体环境叫做内环境
+由<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>构成的液体环境叫做内环境
 
-4. 细胞外液等同于内环境吗？<u>等同</u>
+4. 细胞外液等同于内环境吗？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
-5. 内环境的主要成分有哪些？<u>血浆、组织液（组织间隙液）、淋巴液等</u>
-
+5. 内环境的主要成分有哪些？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 6. 内环境的生理作用是什么？（两点）
-    - <u>是细胞生存的直接环境</u>
-    - <u>是细胞与外界环境进行物质交换的媒介</u>
+    - <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
+    - <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 7. 请在图中填写细胞内液、组织液、淋巴液和血浆四者之间的相互转化关系图  
-<u>①细胞内液、②血浆、③组织液、④淋巴液</u>
+<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 <figure style="text-align: center;">
   <img src="../_media/biology/elective-1/e1-ch1-1.3-fig-interstitial-plasma-lymph-exchange.png" alt="相互转化关系图" width="60%">
   <figcaption>图3: 相互转化关系图</figcaption>
 </figure>
 
-8. 物质传输穿过毛细血管壁时，需要透过几层细胞？<u>一层</u>
+8. 物质传输穿过毛细血管壁时，需要透过几层细胞？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
-9. 毛细血管璧细胞生活在什么液体中？<u>血浆、组织液</u>
+9. 毛细血管璧细胞生活在什么液体中？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
-10. 毛细淋巴管壁细胞生活在什么液体中？<u>淋巴液、组织液</u>
+10. 毛细淋巴管壁细胞生活在什么液体中？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
-11. 细胞外液理化性质包括哪3个方面？<u>渗透压、酸碱度、温度</u>
+11. 细胞外液理化性质包括哪3个方面？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 12. 溶液渗透压大小取决于什么？  
-其大小取决于<u>溶液中溶质微粒对水的吸引力</u>，溶液浓度<u>越高</u>，溶液渗透压<u>越高</u>。
-13. 血浆的渗透压主要靠什么来维持？<u>无机盐和蛋白质</u>
+其大小取决于<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>，溶液浓度<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>，溶液渗透压<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>。
+13. 血浆的渗透压主要靠什么来维持？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 14. 细胞外液和细胞内液渗透压主要来自什么？  
-细胞外液渗透压主要来源于<u>Na+和Cl-</u>，占细胞外液渗透压的90%以上  
-细胞内液渗透压主要来源于<u>K+</u>。
+细胞外液渗透压主要来源于<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>，占细胞外液渗透压的90%以上  
+细胞内液渗透压主要来源于<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>。
 
 15. 人的体温相对稳定，是靠什么维持的？
-人的体温保持相对稳定，需要靠<u>产热量=放热量</u>来维持。
+人的体温保持相对稳定，需要靠<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>来维持。
 
 **进阶篇（冲刺80分必掌握）**
 
 16. 体内的概念是什么？
-    - 体内的概念是什么？<u>体内的概念：不能直接和外界环境相通的是体内</u>
+    - 体内的概念是什么？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
     
-    - 胃和肠道是属于体内吗？为什么？<u>不是，因为胃、肠道直接与外界相通</u>
+    - 胃和肠道是属于体内吗？为什么？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
-    - 人进食到胃部和小肠的食物、大肠中的粪便属于内环境吗？<u>不属于，因为胃和肠道不属于体内</u>
+    - 人进食到胃部和小肠的食物、大肠中的粪便属于内环境吗？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
     
-    - 膀胱中的尿液属于“体内”吗？<u>膀胱中的尿液也不算“体内”，因为它通过尿道可以直接排出，和外界环境相通</u>
+    - 膀胱中的尿液属于“体内”吗？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 17. 辨析下列物质是否存在于内环境当中（将下列物质填写在方框内）
 
 |属于内环境|不属于内环境|
 |----------|-----------|
-|<u>A，B，C，D，E，F，B，G，H，I，J，K，L</u>|<u>M，N，O，P，Q，R，N，S，T，U，V，W</u>|
+|<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>|<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>|
 
 A无机盐&nbsp;&nbsp;
 B氨基酸&nbsp;&nbsp;
@@ -104,15 +101,15 @@ W羊水&nbsp;&nbsp;
 
 18. 血浆蛋白和血红蛋白是什么？他们分别属于内环境的组成部分吗？
 
-    - 血浆蛋白是<u>一类</u>物质，是血浆中多种蛋白质的总称，承担营养性、渗透压性的功能。所以血蛋白<u>属于</u>内环境的组分。
+    - 血浆蛋白是<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>物质，是血浆中多种蛋白质的总称，承担营养性、渗透压性的功能。所以血蛋白<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>内环境的组分。
 
-    - 血红蛋白是<u>一种</u>蛋白质，存在于红细胞中，可使血液呈红色，承担“将氧气运输到人体各器官和组织，并将二氧化碳从器官和组织输送回肺部进行气体交换”的功能。所以血红蛋白<u>不属于</u>内环境的组分。
+    - 血红蛋白是<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>蛋白质，存在于红细胞中，可使血液呈红色，承担“将氧气运输到人体各器官和组织，并将二氧化碳从器官和组织输送回肺部进行气体交换”的功能。所以血红蛋白<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>内环境的组分。
 
 19. 食物蛋白被消化是否属于内环境中的反应？  
-<u>食物蛋白被消化分解成氨基酸，是在消化道内完成的，属于外界环境中的反应</u>
+<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 20. 葡萄糖脱氢并分解成丙酮酸，是否属于内环境中的反应？  
-<u>葡萄糖脱氢并分解成丙酮酸，是在细胞质基质中发生的，属于细胞内液中的反应，而不属于内环的反应</u>
+<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 
 ## 第2节 内环境的稳态
@@ -120,35 +117,29 @@ W羊水&nbsp;&nbsp;
 **基础篇（60分以下必掌握）**
 
 21. 内环境稳态的概念：  
-正常机体通过调节作用，使各个器官、系统协调活动，共同维持内环境的<u>相对稳定</u>状态。
+正常机体通过调节作用，使各个器官、系统协调活动，共同维持内环境的<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>状态。
 
 !> 不能缺少“相对”两个字
 
 22. 内环境稳态包括哪些方面？
-包括<u>组成成分</u>的稳态和<u>理化性质</u>的稳态两个方面。
+包括<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>的稳态和<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>的稳态两个方面。
 
 23. 机体维持稳态的主要调节机制：  
-“<u>神经</u>——<u>体液</u>——<u>免疫调节</u>”网络是机体维持稳态的主要调节机制。
+“<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>——<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>——<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>”网络是机体维持稳态的主要调节机制。
 
-24. 内环境稳态调节的基本方式是什么？<u>反馈调节是内环境稳态调节的基本方式</u>。
+24. 内环境稳态调节的基本方式是什么？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>。
 25. 为什么内环境稳态会失调：  
-   - <u>外界环境的变化过于剧烈</u>；
-   - <u>人体自身的调节功能出现障碍</u>。
+   - <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>；
+   - <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>。
 
-26. 组织水肿的实质是什么？<u>组织液异常增多</u>
+26. 组织水肿的实质是什么？<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 27. 组织水肿的原因是什么？有哪两种来源？  
-   - 原因：<u>组织液渗透压高于血浆</u>。
-   - 来源1<u>血浆渗透压异常下降</u>：水分从血浆流向组织液，导致组织液异常增多。
-   - 来源2<u>组织液渗透压异常升高</u>：水分从血浆流向组织液，导致组织液异常增多。
+   - 原因：<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>。
+   - 来源1<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>：水分从血浆流向组织液，导致组织液异常增多。
+   - 来源2<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>：水分从血浆流向组织液，导致组织液异常增多。
 
 
+## 答案
 
-
-
-
-
-
-
-
-
+[戳这里](./e1-ch1-internal-environment-and-homeostasis-answer.md)!
