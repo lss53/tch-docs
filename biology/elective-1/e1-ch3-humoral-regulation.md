@@ -108,7 +108,7 @@
 <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>、<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
 
 <figure style="text-align: center;">
-  <img src="../_media/biology/elective-1/e1-ch3-3.1-fig-water-and-electrolyte-balance.png" alt="水盐平衡过程" width="30%">
+  <img src="../_media/biology/elective-1/e1-ch3-3.1-fig-water-and-electrolyte-balance.png" alt="水盐平衡过程" width="50%">
   <figcaption>图2: 水盐平衡过程</figcaption>
 </figure>
 
