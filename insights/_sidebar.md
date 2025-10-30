@@ -9,3 +9,7 @@
 
   - [**健康指北**](/insights/health/)
     - [保护你的视力](/insights/health/protect-your-eyesight.md)
+
+  - [**出行指南**](/insights/transport/)
+    - [巫山↔大昌](/insights/transport/wushan-dachang-bus.md)
+    - [巫山↔官阳](/insights/transport/wushan-guanyang-bus.md)
