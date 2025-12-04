@@ -25,7 +25,7 @@
     - [第2章 神经调节](/biology/elective-1/e1-ch2-nervous-regulation.md)
     - [第3章 体液调节](/biology/elective-1/e1-ch3-humoral-regulation.md)
     - [第4章 免疫调节](/biology/elective-1/e1-ch4-immune-regulation.md)
-    - [第5章 植物生命活动的调节](/biology/elective-1/e1-ch5-plant-life-regulation.md)
+    - [第5章 植物生命活动的调节](/biology/elective-1/e1-ch5-plant-life-activity-regulation.md)
   - [**选择性必修二：生物与环境**](/biology/elective-2/)
     - [第1章 种群及其动态](/biology/elective-2/e2-ch1-population-and-its-dynamics.md)
     - [第2章 群落及其演替](/biology/elective-2/e2-ch2-community-and-its-succession.md)
